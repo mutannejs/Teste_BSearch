@@ -1,9 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "unity.h"
 
 #ifndef _BINARYSEARCH_H_
 #define _BINARYSEARCH_H_
+
+/* ### TIPO DOS ELEMENTOS ### */
+
+typedef long long int lli;
+
 
 /* ### BUSCA BINÁRIA ### */
 
@@ -21,6 +27,11 @@
 void* binary_search(const void *key, const void *base, size_t nintems, size_t size, int (*compar)(const void *, const void *), int *path, int ifnotfound);
 
 
+/* ### FUNÇÃO DE COMPARAÇÃO ###*/
+
+int cmp();
+
+
 /* ### NECESSÁRIOS NO USO DO UNITY ### */
 
 void setUp();
@@ -30,6 +41,71 @@ void tearDown();
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
 
+void test_top_empty();
+
+void test_top_one();
+
+void test_top_five();
+
+void test_top_six();
+
+void test_top_empty_not_found();
+
+void test_top_one_not_found();
+
+void test_top_five_not_found();
+
+void test_top_six_not_found();
+
+void test_top_empty_not_found();
+
+void test_top_one_not_found_bef();
+
+void test_top_five_not_found_bef();
+
+void test_top_six_not_found_bef();
+
+void test_top_empty_not_found();
+
+void test_top_one_not_found_next();
+
+void test_top_five_not_found_next();
+
+void test_top_six_not_found_next();
+
+
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
+
+void test_down_empty();
+
+void test_down_one();
+
+void test_down_five();
+
+void test_down_six();
+
+void test_down_empty_not_found();
+
+void test_down_one_not_found();
+
+void test_down_five_not_found();
+
+void test_down_six_not_found();
+
+void test_down_empty_not_found_bef();
+
+void test_down_one_not_found_bef();
+
+void test_down_five_not_found_bef();
+
+void test_down_six_not_found_bef();
+
+void test_down_empty_not_found_next();
+
+void test_down_one_not_found_next();
+
+void test_down_five_not_found_next();
+
+void test_down_six_not_found_next();
 
 #endif
