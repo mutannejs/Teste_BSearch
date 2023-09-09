@@ -11,6 +11,7 @@ int main(int argc, char *argv[]) {
 
 	if (istop == 1) {
 		RUN_TEST(test_top_empty);
+		RUN_TEST(test_top_six);
 	}
 
 	return UNITY_END();

@@ -10,6 +10,11 @@
 
 typedef long long int lli;
 
+typedef struct {
+	lli vector[6];
+	lli keys[7];
+	int path_retorned[6];
+} basics;
 
 /* ### BUSCA BINÁRIA ### */
 
@@ -32,11 +37,18 @@ void* binary_search(const void *key, const void *base, size_t nintems, size_t si
 int cmp();
 
 
-/* ### NECESSÁRIOS NO USO DO UNITY ### */
+/* ### NECESSÁRIAS NO USO DO UNITY ### */
 
 void setUp();
 
 void tearDown();
+
+
+/* ### NECESSÁRIAS NA PREPARAÇÃO DOS DADOS E COMPARAÇÃO DOS ELEMENTOS ### */
+
+basics set_basics(int is_notfound);
+
+void test_compare(int qtd, basics b, int len_path[], int path_expected[][3]);
 
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
