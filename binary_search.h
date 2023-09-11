@@ -16,6 +16,7 @@ typedef struct {
 	int path_retorned[6];
 } basics;
 
+
 /* ### BUSCA BINÁRIA ### */
 
 /**
@@ -27,14 +28,9 @@ typedef struct {
  * @param path			vetor com o índice de todos elementos processados na busca até finalizá-la.
  * @param ifnotfound	informa qual elemento deve ser retornado caso não haja nenhum elemento com a chave informada.
  * 
- * @return	o elemento com a chave passada ou NULL caso ele não tenha sido encontrado.
+ * @return o elemento com a chave passada ou NULL caso ele não tenha sido encontrado.
  * */
 void* binary_search(const void *key, const void *base, size_t nintems, size_t size, int (*compar)(const void *, const void *), int *path, int ifnotfound);
-
-
-/* ### FUNÇÃO DE COMPARAÇÃO ###*/
-
-int cmp();
 
 
 /* ### NECESSÁRIAS NO USO DO UNITY ### */
@@ -45,6 +41,8 @@ void tearDown();
 
 
 /* ### NECESSÁRIAS NA PREPARAÇÃO DOS DADOS E COMPARAÇÃO DOS ELEMENTOS ### */
+
+int cmp();
 
 basics set_basics(int is_notfound);
 

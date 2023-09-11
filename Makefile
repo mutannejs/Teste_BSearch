@@ -1,21 +1,24 @@
 all: binary_search
 
-binary_search: main.o binary_search.o unity.o tests.o
-	gcc -o binary_search binary_search.o main.o tests.o unity.o -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
+binary_search: main.o binary_search.o compare.o unity.o tests.o
+	@ gcc -o binary_search binary_search.o main.o compare.o tests.o unity.o -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
 	@ echo -e "\n\n\nTestes:\n"
-	@./binary_search
+	@ ./binary_search
 
 binary_search.o: binary_search.c binary_search.h
 	gcc -c binary_search.c -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
 
-tests.o: tests.c unity.h binary_search.h unity_internals.h
-	gcc -c tests.c -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
+compare.o: compare.c binary_search.h
+	@ gcc -c compare.c -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
 
 main.o: main.c binary_search.h unity.h unity_internals.h
-	gcc -c main.c -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
+	@ gcc -c main.c -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
+
+tests.o: tests.c binary_search.h unity.h unity_internals.h
+	@ gcc -c tests.c -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
 
 unity.o: unity.c unity.h unity_internals.h
-	gcc -c unity.c
+	@ gcc -c unity.c
 
 clean:
 	rm -f binary_search *.o
