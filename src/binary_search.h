@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "unity.h"
+#include "../unity/unity.h"
 
 #ifndef _BINARYSEARCH_H_
 #define _BINARYSEARCH_H_

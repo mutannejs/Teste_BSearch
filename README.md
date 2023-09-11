@@ -13,4 +13,4 @@ Os testes criados tentam englobar as diferentes possibilidades de
  execução da busca, verificando tanto se o elemento foi encontrado,
  quanto o caminho percorrido. Fornecendo uma interface simples e de
  fácil compreensão, para agilizar os testes e a validação da busca
- corretamente implementada.
+ implementada.
