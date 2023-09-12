@@ -11,9 +11,9 @@
 typedef long long int lli;
 
 typedef struct {
-	lli vector[6];
-	lli keys[7];
-	int path_retorned[6];
+	lli vector[7];
+	lli keys[8];
+	int path_retorned[4];
 } basics;
 
 
@@ -46,11 +46,13 @@ int cmp();
 
 basics set_basics(int is_notfound);
 
-void test_compare(int qtd, basics b, int len_path[], int path_expected[][3]);
+void test_compare(int qtd, basics b, int len_path[], int path_expected[][4]);
 
-void test_compare_bef(int qtd, basics b, int len_path[], int path_expected[][3]);
+void test_compare_not_found(int qtd, basics b, int len_path[], int path_expected[][4]);
 
-void test_compare_next(int qtd, basics b, int len_path[], int path_expected[][3]);
+void test_compare_bef(int qtd, basics b, int len_path[], int path_expected[][4]);
+
+void test_compare_next(int qtd, basics b, int len_path[], int path_expected[][4]);
 
 
 /* ### TESTES BUSCA BINÁRIA INDEPENDENTE DO ARRENDONDAMENTO ###*/
@@ -70,39 +72,71 @@ void test_one_not_found_next();
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
 
+void test_top_four();
+
 void test_top_five();
 
 void test_top_six();
+
+void test_top_seven();
+
+void test_top_four_not_found();
 
 void test_top_five_not_found();
 
 void test_top_six_not_found();
 
+void test_top_seven_not_found();
+
+void test_top_four_not_found_bef();
+
 void test_top_five_not_found_bef();
 
 void test_top_six_not_found_bef();
+
+void test_top_seven_not_found_bef();
+
+void test_top_four_not_found_next();
 
 void test_top_five_not_found_next();
 
 void test_top_six_not_found_next();
 
+void test_top_seven_not_found_next();
+
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
+
+void test_down_four();
 
 void test_down_five();
 
 void test_down_six();
 
+void test_down_seven();
+
+void test_down_four_not_found();
+
 void test_down_five_not_found();
 
 void test_down_six_not_found();
+
+void test_down_seven_not_found();
+
+void test_down_four_not_found_bef();
 
 void test_down_five_not_found_bef();
 
 void test_down_six_not_found_bef();
 
+void test_down_seven_not_found_bef();
+
+void test_down_four_not_found_next();
+
 void test_down_five_not_found_next();
 
 void test_down_six_not_found_next();
+
+void test_down_seven_not_found_next();
 
 #endif

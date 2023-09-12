@@ -3,6 +3,7 @@
 int main(int argc, char *argv[]) {
 
 	int istop = 1;
+	int notfound = 0;
 
 	if (argc == 2 && !strcmp(argv[1], "0"))
 		istop = 0;
@@ -17,7 +18,13 @@ int main(int argc, char *argv[]) {
 	RUN_TEST(test_one_not_found_next);
 
 	if (istop == 1) {
+		RUN_TEST(test_top_four);
+		RUN_TEST(test_top_five);
 		RUN_TEST(test_top_six);
+		RUN_TEST(test_top_seven);
+		if (!notfound) {
+			RUN_TEST(test_top_four_not_found);
+		}
 	}
 
 	return UNITY_END();
