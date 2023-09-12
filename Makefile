@@ -1,9 +1,9 @@
 all: binary_search
+	@ echo "\nTestes:\n"
+	@ ./binary_search
 
 binary_search: main.o binary_search.o compare.o unity.o tests.o
 	@ gcc -o binary_search binary_search.o main.o compare.o tests.o unity.o -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
-	@ echo -e "\n\n\nTestes:\n"
-	@ ./binary_search
 
 binary_search.o: binary_search.c src/binary_search.h
 	gcc -c binary_search.c -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0

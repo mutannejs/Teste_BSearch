@@ -48,36 +48,39 @@ basics set_basics(int is_notfound);
 
 void test_compare(int qtd, basics b, int len_path[], int path_expected[][3]);
 
+void test_compare_bef(int qtd, basics b, int len_path[], int path_expected[][3]);
+
+void test_compare_next(int qtd, basics b, int len_path[], int path_expected[][3]);
+
+
+/* ### TESTES BUSCA BINÁRIA INDEPENDENTE DO ARRENDONDAMENTO ###*/
+
+void test_empty();
+
+void test_one();
+
+void test_one_nopath();
+
+void test_one_not_found();
+
+void test_one_not_found_bef();
+
+void test_one_not_found_next();
+
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
-
-void test_top_empty();
-
-void test_top_one();
 
 void test_top_five();
 
 void test_top_six();
 
-void test_top_empty_not_found();
-
-void test_top_one_not_found();
-
 void test_top_five_not_found();
 
 void test_top_six_not_found();
 
-void test_top_empty_not_found();
-
-void test_top_one_not_found_bef();
-
 void test_top_five_not_found_bef();
 
 void test_top_six_not_found_bef();
-
-void test_top_empty_not_found();
-
-void test_top_one_not_found_next();
 
 void test_top_five_not_found_next();
 
@@ -86,33 +89,17 @@ void test_top_six_not_found_next();
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
 
-void test_down_empty();
-
-void test_down_one();
-
 void test_down_five();
 
 void test_down_six();
-
-void test_down_empty_not_found();
-
-void test_down_one_not_found();
 
 void test_down_five_not_found();
 
 void test_down_six_not_found();
 
-void test_down_empty_not_found_bef();
-
-void test_down_one_not_found_bef();
-
 void test_down_five_not_found_bef();
 
 void test_down_six_not_found_bef();
-
-void test_down_empty_not_found_next();
-
-void test_down_one_not_found_next();
 
 void test_down_five_not_found_next();
 

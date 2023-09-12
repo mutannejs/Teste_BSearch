@@ -9,8 +9,14 @@ int main(int argc, char *argv[]) {
 
 	UNITY_BEGIN();
 
+	RUN_TEST(test_empty);
+	RUN_TEST(test_one);
+	RUN_TEST(test_one_nopath);
+	RUN_TEST(test_one_not_found);
+	RUN_TEST(test_one_not_found_bef);
+	RUN_TEST(test_one_not_found_next);
+
 	if (istop == 1) {
-		RUN_TEST(test_top_empty);
 		RUN_TEST(test_top_six);
 	}
 
