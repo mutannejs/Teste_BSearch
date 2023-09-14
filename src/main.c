@@ -22,8 +22,23 @@ int main(int argc, char *argv[]) {
 		RUN_TEST(test_top_five);
 		RUN_TEST(test_top_six);
 		RUN_TEST(test_top_seven);
-		if (!notfound) {
+		if (notfound == 0) {
 			RUN_TEST(test_top_four_not_found);
+			RUN_TEST(test_top_five_not_found);
+			RUN_TEST(test_top_six_not_found);
+			RUN_TEST(test_top_seven_not_found);
+		}
+		else if (notfound == -1) {
+			RUN_TEST(test_top_four_not_found_bef);
+			RUN_TEST(test_top_five_not_found_bef);
+			RUN_TEST(test_top_six_not_found_bef);
+			RUN_TEST(test_top_seven_not_found_bef);
+		}
+		else {
+			RUN_TEST(test_top_four_not_found_next);
+			RUN_TEST(test_top_five_not_found_next);
+			RUN_TEST(test_top_six_not_found_next);
+			RUN_TEST(test_top_seven_not_found_next);
 		}
 	}
 

@@ -48,11 +48,7 @@ basics set_basics(int is_notfound);
 
 void test_compare(int qtd, basics b, int len_path[], int path_expected[][4]);
 
-void test_compare_not_found(int qtd, basics b, int len_path[], int path_expected[][4]);
-
-void test_compare_bef(int qtd, basics b, int len_path[], int path_expected[][4]);
-
-void test_compare_next(int qtd, basics b, int len_path[], int path_expected[][4]);
+void test_compare_not_found(int qtd, basics b, int len_path[], int path_expected[][4], int ifnotfound);
 
 
 /* ### TESTES BUSCA BINÁRIA INDEPENDENTE DO ARRENDONDAMENTO ###*/
@@ -79,6 +75,14 @@ void test_top_five();
 void test_top_six();
 
 void test_top_seven();
+
+void top_four_not_found(int ifnotfound);
+
+void top_five_not_found(int ifnotfound);
+
+void top_six_not_found(int ifnotfound);
+
+void top_seven_not_found(int ifnotfound);
 
 void test_top_four_not_found();
 
