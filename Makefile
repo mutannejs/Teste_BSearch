@@ -1,5 +1,4 @@
 all: binary_search
-	echo "\nTestes:\n"
 	./binary_search
 
 binary_search: main.o binary_search.o compare.o unity.o tests_down.o tests_top.o tests.o

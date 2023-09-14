@@ -28,8 +28,10 @@ Os testes criados tentam englobar as diferentes possibilidades de
 	- [ ] não encontrados retornando NULL
 	- [ ] não encontrados retornando o predecessor
 	- [ ] não encontrados retornando o sucessor
-- [ ] criar testes com mensagens
-- [ ] permitir maior interação com o que o usuário deseja testar
+- [X] criar testes com mensagens
+- [ ] melhorar mensagens nos testes
+- [X] permitir maior interação com o que o usuário deseja testar
+- [ ] facilitar interação com o usuário
 - [ ] escrever o readme
 	- [ ] descrever o funcionamento da busca binária
 	- [ ] dscrever o motivo de cada teste

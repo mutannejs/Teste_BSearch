@@ -36,11 +36,15 @@ basics set_basics(int is_notfound) {
 void test_compare(int qtd, basics b, int len_path[], int path_expected[][4]) {
 
 	lli *ret;
+	char mensagem[200];
 
 	for (int i = 0; i < qtd; i++) {
+
+		sprintf(mensagem, "O erro ocorreu ao pesquisar o elemento %lld.", b.keys[i]);
+
 		ret = binary_search(&b.keys[i], b.vector, qtd, sizeof(lli), cmp, b.path_retorned, 0);
-		TEST_ASSERT_EQUAL_INT(b.keys[i], *ret);
-		TEST_ASSERT_EQUAL_INT_ARRAY(path_expected[i], b.path_retorned, len_path[i]);
+		TEST_ASSERT_EQUAL_INT_MESSAGE(b.keys[i], *ret, mensagem);
+		TEST_ASSERT_EQUAL_INT_ARRAY_MESSAGE(path_expected[i], b.path_retorned, len_path[i], mensagem);
 	}
 
 }
@@ -48,16 +52,20 @@ void test_compare(int qtd, basics b, int len_path[], int path_expected[][4]) {
 void test_compare_not_found(int qtd, basics b, int len_path[], int path_expected[][4], int ifnotfound) {
 
 	lli *ret;
+	char mensagem[200];
 
 	for (int i = 0; i < qtd+1; i++) {
+
+		sprintf(mensagem, "O erro ocorreu ao pesquisar o elemento %lld.", b.keys[i]);
+
 		ret = binary_search(&b.keys[i], b.vector, qtd, sizeof(lli), cmp, b.path_retorned, ifnotfound);
 		if (ifnotfound == -1 && i > 0)
-			TEST_ASSERT_EQUAL_INT(b.vector[i-1], *ret);
+			TEST_ASSERT_EQUAL_INT_MESSAGE(b.vector[i-1], *ret, mensagem);
 		else if (ifnotfound == 1 && i < qtd)
-			TEST_ASSERT_EQUAL_INT(b.vector[i], *ret);
+			TEST_ASSERT_EQUAL_INT_MESSAGE(b.vector[i], *ret, mensagem);
 		else
-			TEST_ASSERT_NULL(ret);
-		TEST_ASSERT_EQUAL_INT_ARRAY(path_expected[i], b.path_retorned, len_path[i]);
+			TEST_ASSERT_NULL_MESSAGE(ret, mensagem);
+		TEST_ASSERT_EQUAL_INT_ARRAY_MESSAGE(path_expected[i], b.path_retorned, len_path[i], mensagem);
 	}
 
 }
