@@ -52,6 +52,30 @@ int main(int argc, char *argv[]) {
 			RUN_TEST(test_top_seven_not_found_next);
 		}
 	}
+	else {
+		RUN_TEST(test_down_four);
+		RUN_TEST(test_down_five);
+		RUN_TEST(test_down_six);
+		RUN_TEST(test_down_seven);
+		if (notfound == -1 || notfound == 2) {
+			RUN_TEST(test_down_four_not_found_bef);
+			RUN_TEST(test_down_five_not_found_bef);
+			RUN_TEST(test_down_six_not_found_bef);
+			RUN_TEST(test_down_seven_not_found_bef);
+		}
+		if (notfound == 0 || notfound == 2) {
+			RUN_TEST(test_down_four_not_found);
+			RUN_TEST(test_down_five_not_found);
+			RUN_TEST(test_down_six_not_found);
+			RUN_TEST(test_down_seven_not_found);
+		}
+		if (notfound == 1 || notfound == 2) {
+			RUN_TEST(test_down_four_not_found_next);
+			RUN_TEST(test_down_five_not_found_next);
+			RUN_TEST(test_down_six_not_found_next);
+			RUN_TEST(test_down_seven_not_found_next);
+		}
+	}
 
 	return UNITY_END();
 

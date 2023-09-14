@@ -23,18 +23,18 @@ Os testes criados tentam englobar as diferentes possibilidades de
 	- [X] não encontrados retornando NULL
 	- [X] não encontrados retornando o predecessor
 	- [X] não encontrados retornando o sucessor
-- [ ] testes com arredondamento para baixo
-	- [ ] encontrados
-	- [ ] não encontrados retornando NULL
-	- [ ] não encontrados retornando o predecessor
-	- [ ] não encontrados retornando o sucessor
+- [X] testes com arredondamento para baixo
+	- [X] encontrados
+	- [X] não encontrados retornando NULL
+	- [X] não encontrados retornando o predecessor
+	- [X] não encontrados retornando o sucessor
 - [X] criar testes com mensagens
 - [ ] melhorar mensagens nos testes
 - [X] permitir maior interação com o que o usuário deseja testar
 - [ ] facilitar interação com o usuário
 - [ ] escrever o readme
 	- [ ] descrever o funcionamento da busca binária
-	- [ ] dscrever o motivo de cada teste
+	- [ ] descrever o motivo de cada teste
 	- [ ] descrever como executar o programa
 	- [ ] descrever como analisar os erros encontrados
 - [ ] criar arquivo explicando como cada teste funciona
