@@ -5,16 +5,12 @@ int main(int argc, char *argv[]) {
 	int istop = 1;
 	int notfound = 0;
 
-	if (argc >= 2 && !strcmp(argv[1], "d"))
-		istop = 0;
-
-	if (argc >= 3) {
-		if (!strcmp(argv[2], "-1"))
-			notfound = -1;
-		else if (!strcmp(argv[2], "1"))
-			notfound = 1;
-		else if (!strcmp(argv[2], "2"))
-			notfound = 2;
+	for (int i = 1; i < argc; i++) {
+		int op = atoi(argv[i]);
+		if (!strcmp(argv[i], "d"))
+			istop = 0;
+		else if (op >= -1 && op <= 2)
+			notfound = op;
 	}
 
 	printf("\nTestes:\n\n");
