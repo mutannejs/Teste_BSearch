@@ -54,15 +54,16 @@ Após escrever o código da busca binária, para compilar o programa e
 ![make sem parâmetros](images/make_01.jpg)
 
 Na saída do comando podemos ter acesso aos erros encontrados durante a
- compilação, e logo em seguida o resultado da execução do testes
+ compilação, e logo em seguida o resultado da execução dos testes
  básicos.
 
 Por padrão, a maioria dos testes executados consideram que o algoritmo
  da busca utiliza **arredondamento para cima** (mais a frente há uma
- explicação sobre os dois tipos de arredondamentos possíveis), por
- tanto, se seu código foi implementado utilizando arredondamento para
- baixo, não precisa se preocupar caso os testes retornem falha (mais a
- frente também há uma explicação de como interpretar o resultado dos
+ explicação sobre os dois tipos de [arredondamentos](#arredondamentos)
+ possíveis), por tanto, se seu código foi implementado utilizando
+ arredondamento para baixo, não precisa se preocupar caso os testes
+ retornem falha (mais a frente também há uma explicação de como
+ [interpretar](#interpretando-as-saídas-dos-testes) o resultado dos
  testes). Além de considerar que foi utilizado arredondamento para cima,
  são executados apenas testes que encontram o elemento buscado, ou que
  retornam `NULL` por não encontrá-lo.
@@ -119,6 +120,14 @@ Executando novamente o comando `make`:
 
 ![executando o Makefile alterado](images/make_02.jpg)
 
+Na saída podemos ver que vários erros foram encontrados durante os
+ testes, porém isso já era esperado, pois o algoritmo que estava sendo
+ usado ao executar o `make` utiliza arredondamento para cima.
+
+Também é importante notar que embora a execução do `make` tenha
+ retornado erros, esses 10 erros são referentes aos testes da busca
+ binária que falharam.
+
 ## O algoritmo da Busca Binária
 
 Quando precisamos encontrar um dado específico dentro de um vetor,
@@ -155,6 +164,8 @@ Se usássemos busca linear para encontrar o dado, teríamos que percorrer
  elemento por elemento até chegar naquele com valor `13`, sendo
  necessário extamente 14 passos para encontrá-lo (11 a mais se usado
  busca binária).
+
+### Aredondamentos
 
 No exemplo mostrado, tanto o vetor inicial quanto os subvetores
  analisados durante a busca possuíam um número ímpar de elementos. Esse
@@ -267,6 +278,8 @@ Já o **retorno** da função, nada mais é que o endereço do elemento
  de `\*key` é maior que o valor do atributo chave do último elemento
  dentro do vetor.
 
+## Interpretando as saídas dos testes
+
 ## A fazer
 
 - [X] testes padrões
@@ -287,6 +300,6 @@ Já o **retorno** da função, nada mais é que o endereço do elemento
 - [ ] escrever o readme
 	- [X] descrever o funcionamento da busca binária
 	- [ ] descrever o motivo de cada teste
-	- [ ] descrever como executar o programa
+	- [X] descrever como executar o programa
 	- [ ] descrever como analisar os erros encontrados
 - [ ] criar arquivo explicando como cada teste funciona
