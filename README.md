@@ -107,6 +107,66 @@ Se durante o desenvolvimento da busca binária, os testes que você queira
 
 ## O algoritmo da Busca Binária
 
+Quando precisamos encontrar um dado específico dentro de um vetor,
+ basicamente podemos realizar sua busca de duas maneiras diferentes, a
+ partir de uma **busca linear** ou de uma **busca binária**.
+
+Na busca linear, analisamos elemento por elemento, iniciando pelo
+ primeiro índice do vetor, até encontrar o dado buscado, ou percorrer
+ toda a estrutura. Essa abordagem pode não ser muito eficiente quando o
+ vetor possui muitos elementos e aquele que está sendo buscado se
+ encontra próximo ao último índice (ou está nesta posição).
+
+Quando estamos trabalhando com um vetor ordenado, ao analisar um
+ elemento qualquer sabemos de duas coisas: todos elementos em posições
+ anteriores a ele são menores que ele (caso o vetor possa ter dados
+ repetidos, os dados são menores ou iguais), e todos elementos em
+ posições sucessoras são maiores que ele. A busca binária se aproveita
+ desse fato e faz a busca pelo elemento apenas na parte do vetor que ele
+ sabe que o dado está, analisando sempre o elemento que está na posição
+ central daquele subconjunto (sendo o centro do vetor inicial a primeira
+ posição analisada), para então continuar sua busca a partir dele. O
+ algoritmo só para ao encontrar o dado buscado, ou quando não é
+ possível dividir o subvetor em uma parte menor (o subconjunto é formado
+ por apenas um elemento), ou seja, o dado não está no vetor.
+
+Usando como exemplo um vetor de inteiro com 15 elementos, sendo o
+ primeiro elemento igual a `0`, e os próximos elementos igual ao valor
+ do elemento anterior incrementado em 1, se usássemos a busca binária
+ para encontrar o elemento `13`, teriamos a seguinte execução:
+
+![busca binária sem arredondamento](images/sem_arredondamento.jpg)
+
+Se usássemos busca linear para encontrar o dado, teriamos que percorrer
+ elemento por elemento até chegar naquele com valor `13`, sendo
+ necessário extamente 14 passos para encontrá-lo (11 a mais se usado
+ busca binária).
+
+No exemplo mostrado, tanto o vetor inicial quanto os subvetores
+ analisados durante a busca possuíam um número ímpar de elementos. Esse
+ fato implica em existir apenas **um elemento** central no subconjunto
+ analisado, porém, se por acaso fosse encontrado um subvetor com uma
+ quantidade par de elementos, não existiria um elemento central
+ explícito para analisar. Neste caso, poderíamos analisar os dois
+ elementos mais próximos ao centro, depende do **arredondamento** que
+ implementamos em nosso algoritmo da busca binária. Observe:
+
+![busca binária com arredondamento](images/com_arredondamento.jpg)
+
+No exemplo mostrado temos a representação da execução do algoritmo
+ utilizando os dois tipos de arredondamento. Em ambas execuções a
+ solução foi encontrada, porém, o caminho percorrido é diferente. Neste
+ caso, o algoritmo com arredondamento para baixo chegou à solução em
+ apenas dois passos, enquanto a outra implementação chegou à solução em
+ três passos. Porém, isso não implica que utilizar arredondamento para
+ baixo é a melhor escolha, em outros casos o arredondamento para cima
+ poderia se sair melhor, não há uma escolha correta em qual
+ arredondamento utilizar. Essa escolha pode depender da situação onde
+ a busca binária será usada, ou apenas de qual é mais fácil de
+ implementar.
+
+## binary_search()
+
 Dentro do arquivo **binary_search.c**, além da linha `#include
  "src/binary_search.h"`, existe apenas a declaração de uma função, sendo
  ela a função `binary_search()`, responsável pela lógica da
@@ -115,11 +175,24 @@ Dentro do arquivo **binary_search.c**, além da linha `#include
 ```
 void* binary_search(const void *key, const void *base, size_t nintems, size_t size, int (*compar)(const void *, const void *), int *path, int ifnotfound);
 ```
- 
+
 A função `binary_search()` já possui sua interface definida, por tanto,
  é importante que o corpo da função obedeça a seus parâmetros para que
  os testes possam ser executados com êxito. Para isso, é importante
  entender o significado de cada parâmetro, como também de seu retorno.
+
+Mas antes, caso seja necessário, aqui está uma boa referência para
+ aprender como a busca binária funciona: <https://pt.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search>.
+
+Referente aos argumentos, comparando com a função **bsearch()**
+ encontrada na biblioteca padrão C, e outras implementações encontradas
+ pela internet (como na referência citada), a função binary_search()
+ presente nesse programa, possui dois argumentos a mais, **\*path** e
+ **\*ifnotfound**, os quais permitem visualizar o caminho percorrido e
+ retornar elementos alternativos caso o procurado não tenha sido
+ encontrado, ambas características que não estão presentes na bsearch().
+
+Os argumentos da binary_search():
 
 ### \*key
 
@@ -170,9 +243,7 @@ O inteiro `ifnotfound` informa qual deve ser o retorno da função caso
 - 1 : deve ser retornado o menor elemento detre aqueles com o atributo
  chave maoires que o valor de `key`.
 
-### retorno
-
-O **retorno** da função nada mais é que o endereço do elemento
+Já o **retorno** da função, nada mais é que o endereço do elemento
  procurado. Porém a função deve retornar `NULL` caso ocorra algum dos
  três casos:
 

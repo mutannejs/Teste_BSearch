@@ -1,3 +1,4 @@
 *.o
 binary_search
 bsearch_alt.c
+images/*.png
