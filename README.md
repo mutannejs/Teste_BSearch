@@ -51,6 +51,12 @@ Após escrever o código da busca binária, para compilar o programa e
 
 	make
 
+![make sem parâmetros](images/make_01.jpg)
+
+Na saída do comando podemos ter acesso aos erros encontrados durante a
+ compilação, e logo em seguida o resultado da execução do testes
+ básicos.
+
 Por padrão, a maioria dos testes executados consideram que o algoritmo
  da busca utiliza **arredondamento para cima** (mais a frente há uma
  explicação sobre os dois tipos de arredondamentos possíveis), por
@@ -105,6 +111,14 @@ Se durante o desenvolvimento da busca binária, os testes que você queira
  compilação do código há cada mudança nele) já serão executados ao
  utilizar o comando `make`.
 
+Fazendo essa alteração a partir do editor de textos nano:
+
+![alterando o arquivo Makefile](images/make_alterado.jpg)
+
+Executando novamente o comando `make`:
+
+![executando o Makefile alterado](images/make_02.jpg)
+
 ## O algoritmo da Busca Binária
 
 Quando precisamos encontrar um dado específico dentro de um vetor,
@@ -133,11 +147,11 @@ Quando estamos trabalhando com um vetor ordenado, ao analisar um
 Usando como exemplo um vetor de inteiro com 15 elementos, sendo o
  primeiro elemento igual a `0`, e os próximos elementos igual ao valor
  do elemento anterior incrementado em 1, se usássemos a busca binária
- para encontrar o elemento `13`, teriamos a seguinte execução:
+ para encontrar o elemento `13`, teríamos a seguinte execução:
 
 ![busca binária sem arredondamento](images/sem_arredondamento.jpg)
 
-Se usássemos busca linear para encontrar o dado, teriamos que percorrer
+Se usássemos busca linear para encontrar o dado, teríamos que percorrer
  elemento por elemento até chegar naquele com valor `13`, sendo
  necessário extamente 14 passos para encontrá-lo (11 a mais se usado
  busca binária).
@@ -148,8 +162,9 @@ No exemplo mostrado, tanto o vetor inicial quanto os subvetores
  analisado, porém, se por acaso fosse encontrado um subvetor com uma
  quantidade par de elementos, não existiria um elemento central
  explícito para analisar. Neste caso, poderíamos analisar os dois
- elementos mais próximos ao centro, depende do **arredondamento** que
- implementamos em nosso algoritmo da busca binária. Observe:
+ elementos mais próximos ao centro, onde essa escolha nada mais é que o
+ **arredondamento** impregado em nosso algoritmo da busca binária.
+ Observe:
 
 ![busca binária com arredondamento](images/com_arredondamento.jpg)
 
@@ -162,7 +177,7 @@ No exemplo mostrado temos a representação da execução do algoritmo
  baixo é a melhor escolha, em outros casos o arredondamento para cima
  poderia se sair melhor, não há uma escolha correta em qual
  arredondamento utilizar. Essa escolha pode depender da situação onde
- a busca binária será usada, ou apenas de qual é mais fácil de
+ a busca binária será usada, ou apenas de qual é mais intuitiva de
  implementar.
 
 ## binary_search()
@@ -181,16 +196,13 @@ A função `binary_search()` já possui sua interface definida, por tanto,
  os testes possam ser executados com êxito. Para isso, é importante
  entender o significado de cada parâmetro, como também de seu retorno.
 
-Mas antes, caso seja necessário, aqui está uma boa referência para
- aprender como a busca binária funciona: <https://pt.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search>.
-
 Referente aos argumentos, comparando com a função **bsearch()**
- encontrada na biblioteca padrão C, e outras implementações encontradas
- pela internet (como na referência citada), a função binary_search()
- presente nesse programa, possui dois argumentos a mais, **\*path** e
- **\*ifnotfound**, os quais permitem visualizar o caminho percorrido e
- retornar elementos alternativos caso o procurado não tenha sido
- encontrado, ambas características que não estão presentes na bsearch().
+ encontrada na biblioteca padrão C e outras implementações encontradas
+ pela internet, a função binary_search() presente nesse programa, possui
+ dois argumentos a mais, **\*path** e **\*ifnotfound**, os quais
+ permitem visualizar o caminho percorrido e retornar elementos
+ alternativos caso o procurado não tenha sido encontrado, ambas
+ características que não estão presentes na bsearch().
 
 Os argumentos da binary_search():
 
@@ -273,7 +285,7 @@ Já o **retorno** da função, nada mais é que o endereço do elemento
 - [X] permitir maior interação com o que o usuário deseja testar
 - [X] facilitar interação com o usuário
 - [ ] escrever o readme
-	- [ ] descrever o funcionamento da busca binária
+	- [X] descrever o funcionamento da busca binária
 	- [ ] descrever o motivo de cada teste
 	- [ ] descrever como executar o programa
 	- [ ] descrever como analisar os erros encontrados
