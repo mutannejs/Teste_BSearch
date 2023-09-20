@@ -108,7 +108,7 @@ Assim, os testes para as situações consideradas, e apenas eles, seriam
 Se durante o desenvolvimento da busca binária, os testes que você queira
  que sejam realizados sejam sempre os mesmos, você pode alterar a
  segunda linha do arquivo `Makefile`, acrescentando a passagem de
- argumentos na execução do programa, assim, todo os testes (além da
+ argumentos na execução do programa, assim, todos os testes (além da
  compilação do código há cada mudança nele) já serão executados ao
  utilizar o comando `make`.
 
@@ -165,7 +165,7 @@ Se usássemos busca linear para encontrar o dado, teríamos que percorrer
  necessário extamente 14 passos para encontrá-lo (11 a mais se usado
  busca binária).
 
-### Aredondamentos
+### Arredondamentos
 
 No exemplo mostrado, tanto o vetor inicial quanto os subvetores
  analisados durante a busca possuíam um número ímpar de elementos. Esse
@@ -217,33 +217,33 @@ Referente aos argumentos, comparando com a função **bsearch()**
 
 Os argumentos da binary_search():
 
-### \*key
+- **\*key**
 
 O ponteiro `key` é o endereço da chave a ser pesquisada, ou seja, o
  elemento procurado possui seu atributo chave igual ao valor de
  `\*key`.
 
-### \*base
+- **\*base**
 
 O ponteiro `base` é o endereço do vetor onde a busca será feita.
  Lembrando que é esse vetor deve estar ordenado.
 
-### nitems
+- **nitems**
 
 `nitems` é a quantidade de elementos que o vetor possui.
 
-### size
+- **size**
 
 `size` é o tamanho em memória que os dados indexados pelo vetor
  `base` ocupam, normalmente pode-se usar a função `sizeof()` para
  encontrar este valor.
 
-### \*compar
+- **\*compar**
 
 O ponteiro `compar` define a função que será usada para comparar os
  elementos do vetor.
 
-### \*path
+- **\*path**
 
 O ponteiro `path` representa o caminho processado pelo algoritmo até
  chegar na solução. Ele pode ser igual a `NULL`, indicando que o
@@ -254,7 +254,7 @@ O ponteiro `path` representa o caminho processado pelo algoritmo até
  armazenado o valor do segundo elemento processado na busca, e assim por
  diante.
 
-### ifnotfound
+- **ifnotfound**
 
 O inteiro `ifnotfound` informa qual deve ser o retorno da função caso
  o elemento buscado não seja encontrado. `ifnotfound` pode assumir os
@@ -280,6 +280,52 @@ Já o **retorno** da função, nada mais é que o endereço do elemento
 
 ## Interpretando as saídas dos testes
 
+Para interpretar o resultados dos testes, antes é necessário entender o
+ motivo da criação deles, o que cada um deles vai testar de especial.
+ Em geral eles testam quando ocorre e quando não ocorre arredondamento
+ na execução do código, em outras palavras, quando o subvetor a ser
+ analisado possui uma quantidade par e quando possui uma quantidade
+ ímpar de elementos. Considerando também a sequência em que ambas
+ possiblidades ocorrem.
+
+### Testes para casos especiais
+
+- **test_empty** : quando é feito a busca em um vetor com zero
+ elementos. A busca deve retornar `NULL` e o vetor **\*path** não deve
+ ser alterado ;
+- **test_one** : quando há apenas um elemento no vetor. A busca deve
+ retornar o elemento e apenas ele deve fazer parte do vetor **\*path**;
+- **test_one_nopath** : quando há apenas um elemento no vetor. A busca
+ deve retornar o elemento mas não deve manipular o vetor **\*path**;
+
+### Testes onde o arredondamento é importante
+
+- **test_top_four** : para encontrar o elemento, a busca realiza
+ dois arredondamentos consecutivos; 
+- **test_top_five** : para encontrar o elemento, a busca primeiramente
+ compara o elemento no centro do vetor, e depois realiza um
+ arredondamento;
+- **test_top_six** : para encontrar o elemento, a busca primeiramente
+ faz um arredondamento e em seguida compara apenas elmentos que estão no
+ centro dos subvetores encontrados;
+- **test_top_seven** : para encontrar o elemento, a busca apenas compara
+ elementos que estão no centro do conjunto analisado;
+
+Assim, com esses teste é possível saber se a busca está:
+
+- se comportando corretamente para vetores:
+	- vazios;
+	- com apenas um elemento;
+	- com vários elementos;
+- se comportando corretamente quando:
+	- é realizado dois ou mais arredondamentos em seguida;
+	- é realizado um arredondamento logo após a comparação de um
+	 elemento de centro;
+	- é comparado um elemento de centro logo após a realização de um
+	 arredondamento;
+	- não ocorre arredondamentos, apenas é feita a comparação de vários
+	 elementos de centro em seguida.
+
 ## A fazer
 
 - [X] testes padrões
@@ -299,7 +345,7 @@ Já o **retorno** da função, nada mais é que o endereço do elemento
 - [X] facilitar interação com o usuário
 - [ ] escrever o readme
 	- [X] descrever o funcionamento da busca binária
-	- [ ] descrever o motivo de cada teste
 	- [X] descrever como executar o programa
 	- [ ] descrever como analisar os erros encontrados
+	- [ ] descrever o motivo de cada teste
 - [ ] criar arquivo explicando como cada teste funciona
