@@ -361,9 +361,87 @@ Dessa saída, devemos dar atenção as seguintes informações:
 
 ![interpretando a saída](images/interpretando_01.jpg)
 
-Marcado em amarelo...
+Demarcado em amarelo, temos o comando usado para executar o
+ binary_search, o mesmo comando presente na segunda linha do Makefile.
+
+Em vermelho temos toda a saída referente aos testes, sendo o resultado
+ dos testes cada uma das linhas começada com `src/main.c`, onde temos
+ entre os caracteres `:` alguma informação sobre o teste específico.
+ Usando como exemplo o primeiro resultado (demarcado em azul) temos:
+
+- `src/main.c` : é o arquivo onde a chamada do teste está, no caso,
+ todos os testes são chamados no arquivo main.c, dentro da pasta src;
+- `28` : a linha onde o teste foi chamado;
+- `test_empty` : o nome do teste;
+- `PASS` : o resultado do teste, nesse caso significa que a busca
+ binária implementada passou no teste;
+
+Demarcado em roxo temos o total de testes realizados, seguido pelo total
+ de testes que apresentaram falha e pelo total de testes que foram
+ ignorados (nenhum teste é ignorado independente dos argumentos
+ passados em `.binary_search`).
+
+Por fim, tanto na imagem a cima, quanto na imagem de baixo, temos linhas
+ demarcadas em verde, essas são linhas que retornaram falha. Por tanto,
+ no lugar de `PASS`, como na linha demarcada em azul, há a palavra
+ `FAIL`, e após dela, temos a descrição da falha.
 
 ![interpretando a saída](images/interpretando_02.jpg)
+
+Ao combinar o **nome do teste** com a **descrição da falha**, obtemos a
+ melhor indicação do motivo de seu ocorrimento. A falha pode ter
+ ocorrido por diversas causa, como algum problema na implementação do
+ arredondamento, ou alguma possiblidade não considerada no código.
+
+### Nome do teste
+
+Todos os testes possuem a descrição do que fazem em seu nome.
+
+Em geral, todos os testes tem seu nome iniciado com a palavra `test`
+ seguido da palavra `top` ou `down`, inidicando qual tipo de
+ arredondamento será considerado, arredondamento para baixo (down) ou
+ arredondamento para cima (top).
+
+Depois, temos no nome algum número em formato texto (one, four, five,
+ six ou seven), indicando quantos elementos o vetor onde é feito a busca
+ possui. Alguns testes tem seu nome terminado por esse número, sendo
+ esses, testes onde o elemento procurado está presente no vetor.
+
+Os testes que possuem mais informação, ou seja, os testes onde o
+ elemento procurado não está no vetor, possuem após a informação da
+ quantidade de elementos, as palavras `not_found`, e após elas, podem ou
+ não ter a palavra `bef` (de before) ou a palavra `next`.
+
+- Caso o nome do teste termine em `not_found`, significa que na execução
+ da função `binary_search()` será passado para o argumento `ifnotfound`
+ o valor `0`;
+- Caso o nome termine em `bef`, significa que foi passado para o
+ argumento `ifnotfound` o valor `-1`;
+- Caso o nome termine em `next`, significa que foi passado para o
+ argumento `ifnotfound` o valor `1`,
+
+Por fim, temos três testes que não seguem esse padrão, e que são
+ sempre executados, são eles:
+
+- test_empty : testa a busca para um vetor vazio;
+- test_one : testa a busca para um vetor com apenas um elemento, o mesmo
+ que está sendo procurado;
+- test_one_nopath : igual ao de cima, mas na execução da
+ `binary_search()` passa o valor `NULL` para o argumento `\*path`,
+ indicando que não deve-se retornar o caminho percorrido.
+
+Por exemplo, o teste `test_top_five_not_found_bef` testa a busca binária
+ implementada com arredondamento para cima utilizando um vetor de cinco
+ elementos, onde o elemento procurado não está presente, sendo esperado
+ que ao não encontrar seja retornado o maior elemento detre aqueles com
+ o atributo chave menores que o valor de `key`. O teste
+ `test_down_seven_not_found_next` por sua vez, testa a busca binária
+ implementada com arredondamento para baixo ultilizando um vetor de sete
+ elementos, onde o elemento procurado não está presente, sendo esperado
+ que ao não encontrá-lo seja retornado o menor elemento detre aqueles
+ com o atributo chave maoires que o valor de `key`.
+
+### Decrição da falha
 
 ## A fazer
 
