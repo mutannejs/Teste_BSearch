@@ -51,7 +51,7 @@ Após escrever o código da busca binária, para compilar o programa e
 
 	make
 
-![make sem parâmetros](images/make_01.png)
+![make sem parâmetros](images/make_01.jpg)
 
 Na saída do comando podemos ter acesso aos erros encontrados durante a
  compilação, e logo em seguida o resultado da execução dos testes
@@ -114,11 +114,11 @@ Se durante o desenvolvimento da busca binária, os testes que você queira
 
 Fazendo essa alteração a partir do editor de textos nano:
 
-![alterando o arquivo Makefile](images/make_alterado.png)
+![alterando o arquivo Makefile](images/make_alterado.jpg)
 
 Executando novamente o comando `make`:
 
-![executando o Makefile alterado](images/make_02.png)
+![executando o Makefile alterado](images/make_02.jpg)
 
 Na saída podemos ver que vários erros foram encontrados durante os
  testes, porém isso já era esperado, pois o algoritmo que estava sendo
@@ -158,7 +158,7 @@ Usando como exemplo um vetor de inteiro com 15 elementos, sendo o
  do elemento anterior incrementado em 1, se usássemos a busca binária
  para encontrar o elemento `13`, teríamos a seguinte execução:
 
-![busca binária sem arredondamento](images/sem_arredondamento.png)
+![busca binária sem arredondamento](images/sem_arredondamento.jpg)
 
 Se usássemos busca linear para encontrar o dado, teríamos que percorrer
  elemento por elemento até chegar naquele com valor `13`, sendo
@@ -177,7 +177,7 @@ No exemplo mostrado, tanto o vetor inicial quanto os subvetores
  **arredondamento** impregado em nosso algoritmo da busca binária.
  Observe:
 
-![busca binária com arredondamento](images/com_arredondamento.png)
+![busca binária com arredondamento](images/com_arredondamento.jpg)
 
 No exemplo mostrado temos a representação da execução do algoritmo
  utilizando os dois tipos de arredondamento. Em ambas execuções a
@@ -355,15 +355,15 @@ Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
  partir da execução do comando `make` com o arquivo Makefile alterado
  para realizar os testes com arredondamento para baixo:
 
-![teste com arredondamento para baixo](imagens/test_down.png)
+![teste com arredondamento para baixo](images/test_down.jpg)
 
 Dessa saída, devemos dar atenção as seguintes informações:
 
-![interpretando a saída](imagens/interpretando_01.png)
+![interpretando a saída](images/interpretando_01.jpg)
 
 Marcado em amarelo...
 
-![interpretando a saída](imagens/interpretando_02.png)
+![interpretando a saída](images/interpretando_02.jpg)
 
 ## A fazer
 
@@ -386,5 +386,5 @@ Marcado em amarelo...
 	- [X] descrever o funcionamento da busca binária
 	- [X] descrever como executar o programa
 	- [ ] descrever como analisar os erros encontrados
-	- [ ] descrever o motivo de cada teste
+	- [X] descrever o motivo de cada teste
 - [ ] criar arquivo explicando como cada teste funciona
