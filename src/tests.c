@@ -40,7 +40,7 @@ void test_compare(int qtd, basics b, int len_path[], int path_expected[][4]) {
 
 	for (int i = 0; i < qtd; i++) {
 
-		sprintf(mensagem, "Search %lld.", b.keys[i]);
+		sprintf(mensagem, "Searching %lld.", b.keys[i]);
 
 		ret = binary_search(&b.keys[i], b.vector, qtd, sizeof(lli), cmp, b.path_retorned, 0);
 		TEST_ASSERT_EQUAL_INT_MESSAGE(b.keys[i], *ret, mensagem);
@@ -56,7 +56,7 @@ void test_compare_not_found(int qtd, basics b, int len_path[], int path_expected
 
 	for (int i = 0; i < qtd+1; i++) {
 
-		sprintf(mensagem, "Search %lld.", b.keys[i]);
+		sprintf(mensagem, "Searching %lld.", b.keys[i]);
 
 		ret = binary_search(&b.keys[i], b.vector, qtd, sizeof(lli), cmp, b.path_retorned, ifnotfound);
 		if (ifnotfound == -1 && i > 0)

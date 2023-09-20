@@ -51,7 +51,7 @@ Após escrever o código da busca binária, para compilar o programa e
 
 	make
 
-![make sem parâmetros](images/make_01.jpg)
+![make sem parâmetros](images/make_01.png)
 
 Na saída do comando podemos ter acesso aos erros encontrados durante a
  compilação, e logo em seguida o resultado da execução dos testes
@@ -114,11 +114,11 @@ Se durante o desenvolvimento da busca binária, os testes que você queira
 
 Fazendo essa alteração a partir do editor de textos nano:
 
-![alterando o arquivo Makefile](images/make_alterado.jpg)
+![alterando o arquivo Makefile](images/make_alterado.png)
 
 Executando novamente o comando `make`:
 
-![executando o Makefile alterado](images/make_02.jpg)
+![executando o Makefile alterado](images/make_02.png)
 
 Na saída podemos ver que vários erros foram encontrados durante os
  testes, porém isso já era esperado, pois o algoritmo que estava sendo
@@ -158,7 +158,7 @@ Usando como exemplo um vetor de inteiro com 15 elementos, sendo o
  do elemento anterior incrementado em 1, se usássemos a busca binária
  para encontrar o elemento `13`, teríamos a seguinte execução:
 
-![busca binária sem arredondamento](images/sem_arredondamento.jpg)
+![busca binária sem arredondamento](images/sem_arredondamento.png)
 
 Se usássemos busca linear para encontrar o dado, teríamos que percorrer
  elemento por elemento até chegar naquele com valor `13`, sendo
@@ -177,7 +177,7 @@ No exemplo mostrado, tanto o vetor inicial quanto os subvetores
  **arredondamento** impregado em nosso algoritmo da busca binária.
  Observe:
 
-![busca binária com arredondamento](images/com_arredondamento.jpg)
+![busca binária com arredondamento](images/com_arredondamento.png)
 
 No exemplo mostrado temos a representação da execução do algoritmo
  utilizando os dois tipos de arredondamento. Em ambas execuções a
@@ -278,7 +278,7 @@ Já o **retorno** da função, nada mais é que o endereço do elemento
  de `\*key` é maior que o valor do atributo chave do último elemento
  dentro do vetor.
 
-## Interpretando as saídas dos testes
+## Motivo dos testes
 
 Para interpretar o resultados dos testes, antes é necessário entender o
  motivo da criação deles, o que cada um deles vai testar de especial.
@@ -300,18 +300,24 @@ Para interpretar o resultados dos testes, antes é necessário entender o
 
 ### Testes onde o arredondamento é importante
 
+Alguns testes abaixo podem se comportar de maneira semelhante dependendo
+ do elemento procurado, mas a descrição deles informa o que eles tem
+ como diferença principal. Além disso, as características citadas não
+ levam em consideração quando o subvetor analisado possui apenas um
+ elemento.
+
 - **test_top_four** : para encontrar o elemento, a busca realiza
  dois arredondamentos consecutivos; 
 - **test_top_five** : para encontrar o elemento, a busca primeiramente
  compara o elemento no centro do vetor, e depois realiza um
  arredondamento;
 - **test_top_six** : para encontrar o elemento, a busca primeiramente
- faz um arredondamento e em seguida compara apenas elmentos que estão no
- centro dos subvetores encontrados;
+ faz um arredondamento e em seguida compara apenas elementos que estão
+ no centro dos subvetores encontrados;
 - **test_top_seven** : para encontrar o elemento, a busca apenas compara
  elementos que estão no centro do conjunto analisado;
 
-Assim, com esses teste é possível saber se a busca está:
+Assim, com todos os testes mencionado é possível saber se a busca está:
 
 - se comportando corretamente para vetores:
 	- vazios;
@@ -325,6 +331,39 @@ Assim, com esses teste é possível saber se a busca está:
 	 arredondamento;
 	- não ocorre arredondamentos, apenas é feita a comparação de vários
 	 elementos de centro em seguida.
+
+Embora os testes mencionados realizem apenas arredondamento para cima,
+ os testes com arredondamento para baixo se comportaram de maneira
+ igual.
+
+Agora, em relação aos testes que não encontram o elemento prcurado,
+ podemos saber se a busca binária se comporta corretamente quando é
+ esperado que:
+
+- ela encontre o maior elemento detre aqueles com o atributo chave
+ menores que o valor de `key`;
+- ela encontre o menor elemento detre aqueles com o atributo chave
+ maiores que o valor de `key`;
+- seja retornado `NULL` quando não é possível retornar um elemento menor
+ que o elemento procurado;
+- seja retornado `NULL` quando não é possível retornar um elemento maior
+ que o elemento procurado;
+
+## Interpretando as saídas dos testes
+
+Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
+ partir da execução do comando `make` com o arquivo Makefile alterado
+ para realizar os testes com arredondamento para baixo:
+
+![teste com arredondamento para baixo](imagens/test_down.png)
+
+Dessa saída, devemos dar atenção as seguintes informações:
+
+![interpretando a saída](imagens/interpretando_01.png)
+
+Marcado em amarelo...
+
+![interpretando a saída](imagens/interpretando_02.png)
 
 ## A fazer
 
