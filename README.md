@@ -15,6 +15,10 @@ Os testes criados tentam englobar as diferentes possibilidades de
  fácil compreensão, para agilizar os testes e a validação da busca
  implementada.
 
+:wrench: Esse projeto foi implementado utilizando o framework
+ [Unity](https://github.com/ThrowTheSwitch/Unity/tree/master), que
+ auxilia na criação de testes unitários construídos em C
+
 :bangbang: _**Obs:**_ os testes criados consideram que o vetor
  processado é ordenado e não possui elementos repetidos.
 
@@ -43,90 +47,6 @@ Outra ferramenta necessária é o **gcc**. Em sistemas Linux baseados em
  Debian esses dois programas podem ser instalados utilizando o comando:
 
 	apt install build-essential
-
-## Execução dos testes
-
-Após escrever o código da busca binária, para compilar o programa e
- executar os testes básicos em seguida deve-se rodar o comando:
-
-	make
-
-![make sem parâmetros](images/make_01.jpg)
-
-Na saída do comando podemos ter acesso aos erros encontrados durante a
- compilação, e logo em seguida o resultado da execução dos testes
- básicos.
-
-Por padrão, a maioria dos testes executados consideram que o algoritmo
- da busca utiliza **arredondamento para cima** (mais a frente há uma
- explicação sobre os dois tipos de [arredondamentos](#arredondamentos)
- possíveis), por tanto, se seu código foi implementado utilizando
- arredondamento para baixo, não precisa se preocupar caso os testes
- retornem falha (mais a frente também há uma explicação de como
- [interpretar](#interpretando-as-saídas-dos-testes) o resultado dos
- testes). Além de considerar que foi utilizado arredondamento para cima,
- são executados apenas testes que encontram o elemento buscado, ou que
- retornam `NULL` por não encontrá-lo.
-
-Após cada alteração no código é necessário utilizar o comando `make`
- novamente. Porém, se o teste que você deseja realizar não faz parte
- daqueles feitos ao rodar o comando, será necessário executar o arquivo
- `binary_search`, criado com a compilação do código. A escolha dos
- testes a realizar é feita a partir da combinação de argumentos passados
- na execução do programa, possuindo como possíveis valores as opções
- listadas a baixo:
-
-- Referentes ao tipo de arredondamento utilizado (caso ambos valores
- sejam passados, o último será o considerado)
-	- **t** : executa os testes com arredondamento para cima;
-	- **d** : executa os testes com arredondamento para baixo.
-
-- Referentes ao retorno da função caso o elemento buscado não seja
- encontrado (pode-se usar mais que um)
-	- **-1** : executa os testes que retornam o maior elemento detre
-	aqueles com o atributo chave menores que o valor de `key`;
-	- **0** : executa os testes que retornam `NULL`;
-	- **1** : executa os testes que retornam o menor elemento detre
-	aqueles com o atributo chave maoires que o valor de `key`;
-	- **2** : executa todos os três tipos de testes anteriores.
-
-**Por exemplo:** caso você tenha implementado sua busca binária com
- arredondamento para baixo, e pretenda utilizá-la em duas situações
- diferentes, uma onde caso não encontrado o elemento buscado seja
- necessário retornar o maior elemento detre os menores que ele, e na
- outra onde caso o elemento buscado não seja encontrado não deva-se
- retornar nenhum outro em seu lugar, uma possível execução do programa
- para esse exemplo seria:
-
-	./binary_search d -1 0
-
-Assim, os testes para as situações consideradas, e apenas eles, seriam
- realizados.
-
-### Dica
-
-Se durante o desenvolvimento da busca binária, os testes que você queira
- que sejam realizados sejam sempre os mesmos, você pode alterar a
- segunda linha do arquivo `Makefile`, acrescentando a passagem de
- argumentos na execução do programa, assim, todos os testes (além da
- compilação do código há cada mudança nele) já serão executados ao
- utilizar o comando `make`.
-
-Fazendo essa alteração a partir do editor de textos nano:
-
-![alterando o arquivo Makefile](images/make_alterado.jpg)
-
-Executando novamente o comando `make`:
-
-![executando o Makefile alterado](images/make_02.jpg)
-
-Na saída podemos ver que vários erros foram encontrados durante os
- testes, porém isso já era esperado, pois o algoritmo que estava sendo
- usado ao executar o `make` utiliza arredondamento para cima.
-
-Também é importante notar que embora a execução do `make` tenha
- retornado erros, esses 10 erros são referentes aos testes da busca
- binária que falharam.
 
 ## O algoritmo da Busca Binária
 
@@ -217,66 +137,162 @@ Referente aos argumentos, comparando com a função **bsearch()**
 
 Os argumentos da binary_search():
 
-- **\*key**
-
-O ponteiro `key` é o endereço da chave a ser pesquisada, ou seja, o
- elemento procurado possui seu atributo chave igual ao valor de
+- **\*key** : esse ponteiro aponta para a chave usada na busca, ou seja,
+ o elemento procurado deve possuir seu atributo chave igual ao valor de
  `\*key`.
 
-- **\*base**
+- **\*base** : esse ponteiro aponta para o vetor onde a busca será
+ feita. Lembrando que esse vetor deve estar ordenado.
 
-O ponteiro `base` é o endereço do vetor onde a busca será feita.
- Lembrando que é esse vetor deve estar ordenado.
+- **nitems** : esse inteiro informa a quantidade de elementos que o
+ vetor possui.
 
-- **nitems**
-
-`nitems` é a quantidade de elementos que o vetor possui.
-
-- **size**
-
-`size` é o tamanho em memória que os dados indexados pelo vetor
+- **size** : é o tamanho em memória que os dados indexados pelo vetor
  `base` ocupam, normalmente pode-se usar a função `sizeof()` para
  encontrar este valor.
 
-- **\*compar**
+- **\*compar** : esse ponteiro define a função que será usada para
+ comparar os elementos do vetor. Essa função deve receber dois
+ argumentos do tipo `const void *`, onde o primeiro argumento representa
+ o ponteiro `key`, e o segundo receberá o endereço do elemento do vetor
+ que será comparado. A função deve retornar um inteiro negativo caso
+ `key` seja menor que o elemento passado no segundo argumento, um
+ inteiro positivo caso `key` seja maior, ou zero caso eles sejam iguais.
 
-O ponteiro `compar` define a função que será usada para comparar os
- elementos do vetor.
+- **\*path** : esse ponteiro representa o caminho processado pelo
+ algoritmo até chegar na solução. Ele pode ser igual a `NULL`, indicando
+ que o caminho para chegar à solução não é necessário (neste caso,
+ `path` não deve ser manipulado), ou ser o endereço de um vetor de
+ inteiros pré alocado, onde na primeira posição do vetor deve ser
+ armazenado o valor do primeiro elemento processado na busca, na segunda
+ posição do vetor armazenado o valor do segundo elemento processado na
+ busca, e assim por diante.
 
-- **\*path**
-
-O ponteiro `path` representa o caminho processado pelo algoritmo até
- chegar na solução. Ele pode ser igual a `NULL`, indicando que o
- caminho para chegar à solução não é necessário (neste caso, `path`
- não deve ser manipulado), ou ser o endereço de um vetor de inteiros pré
- alocado, onde na primeira posição do vetor deve ser armazenado o valor
- do primeiro elemento processado na busca, na segunda posição do vetor
- armazenado o valor do segundo elemento processado na busca, e assim por
- diante.
-
-- **ifnotfound**
-
-O inteiro `ifnotfound` informa qual deve ser o retorno da função caso
- o elemento buscado não seja encontrado. `ifnotfound` pode assumir os
- três valores:
+- **ifnotfound** : esse inteiro informa qual deve ser o retorno da
+ função caso o elemento buscado não seja encontrado. `ifnotfound` pode
+ assumir os três valores:
  
-- -1 : deve ser retornado o maior elemento detre aqueles com o atributo
- chave menores que o valor de `key`;
-- 0 : deve ser retornado `NULL`;
-- 1 : deve ser retornado o menor elemento detre aqueles com o atributo
- chave maoires que o valor de `key`.
+	- -1 : deve ser retornado o maior elemento detre aqueles com o
+	 atributo chave menores que o valor de `key`;
+	- 0 : deve ser retornado `NULL`;
+	- 1 : deve ser retornado o menor elemento detre aqueles com o
+	 atributo chave maoires que o valor de `key`.
 
-Já o **retorno** da função, nada mais é que o endereço do elemento
+- o **retorno** da função, nada mais é que o endereço do elemento
  procurado. Porém a função deve retornar `NULL` caso ocorra algum dos
  três casos:
 
-- o elemento não foi encontrado e `ifnotfound` é igual a 0;
-- o elemento não foi encontrado, `ifnotfound` é igual a -1 e o valor
- de `\*key` é menor que o valor do atributo chave do primeiro elemento
- dentro do vetor;
-- o elemento não foi encontrado, `ifnotfound` é igual a 1 e o valor
- de `\*key` é maior que o valor do atributo chave do último elemento
- dentro do vetor.
+	- o elemento não foi encontrado e `ifnotfound` é igual a 0;
+	- o elemento não foi encontrado, `ifnotfound` é igual a -1 e o valor
+	 de `\*key` é menor que o valor do atributo chave do primeiro
+	 elemento dentro do vetor;
+	- o elemento não foi encontrado, `ifnotfound` é igual a 1 e o valor
+	 de `\*key` é maior que o valor do atributo chave do último elemento
+	 dentro do vetor.
+
+Um _exemplo_ do uso dessa função seria:
+
+```
+/* consirando que a função de comparação possui o nome comp_int e já
+ tenja sido implementada em outro local */
+
+int v[] = {3, 5, 7, 11};
+int caminho[4];
+int chave = 4;
+
+int *ret = binary_search(&chave, v, 4, sizoef(int), comp_int, caminho, 0);
+
+if (ret == NULL) {
+	printf("O elemento %d não está presente no vetor", chave);
+}
+else {
+	printf("O elemento %d está no vetor", chave);
+}
+
+```
+
+## Execução dos testes
+
+Após escrever o código da busca binária, para compilar o programa e
+ executar os testes básicos em seguida deve-se rodar o comando:
+
+	make
+
+![make sem parâmetros](images/make_01.jpg)
+
+Na saída do comando podemos ter acesso aos erros encontrados durante a
+ compilação, e logo em seguida o resultado da execução dos testes
+ básicos.
+
+Por padrão, a maioria dos testes executados consideram que o algoritmo
+ da busca utiliza **arredondamento para cima** (mais a frente há uma
+ explicação sobre os dois tipos de [arredondamentos](#arredondamentos)
+ possíveis), por tanto, se seu código foi implementado utilizando
+ arredondamento para baixo, não precisa se preocupar caso os testes
+ retornem falha (mais a frente também há uma explicação de como
+ [interpretar](#interpretando-as-saídas-dos-testes) o resultado dos
+ testes). Além de considerar que foi utilizado arredondamento para cima,
+ são executados apenas testes que encontram o elemento buscado, ou que
+ retornam `NULL` por não encontrá-lo.
+
+Após cada alteração no código é necessário utilizar o comando `make`
+ novamente. Porém, se o teste que você deseja realizar não faz parte
+ daqueles feitos ao rodar o comando, será necessário executar o arquivo
+ `binary_search`, criado com a compilação do código. A escolha dos
+ testes a realizar é feita a partir da combinação de argumentos passados
+ na execução do programa, possuindo como possíveis valores as opções
+ listadas a baixo:
+
+- Referentes ao tipo de arredondamento utilizado (caso ambos valores
+ sejam passados, o último será o considerado)
+	- **t** : executa os testes com arredondamento para cima;
+	- **d** : executa os testes com arredondamento para baixo.
+
+- Referentes ao retorno da função caso o elemento buscado não seja
+ encontrado (pode-se usar mais que um)
+	- **-1** : executa os testes que retornam o maior elemento detre
+	aqueles com o atributo chave menores que o valor de `key`;
+	- **0** : executa os testes que retornam `NULL`;
+	- **1** : executa os testes que retornam o menor elemento detre
+	aqueles com o atributo chave maoires que o valor de `key`;
+	- **2** : executa todos os três tipos de testes anteriores.
+
+**Por exemplo:** caso você tenha implementado sua busca binária com
+ arredondamento para baixo, e pretenda utilizá-la em duas situações
+ diferentes, uma onde caso não encontrado o elemento buscado seja
+ necessário retornar o maior elemento detre os menores que ele, e na
+ outra onde caso o elemento buscado não seja encontrado não deva-se
+ retornar nenhum outro em seu lugar, uma possível execução do programa
+ para esse exemplo seria:
+
+	./binary_search d -1 0
+
+Assim, os testes para as situações consideradas, e apenas eles, seriam
+ realizados.
+
+### Dica
+
+Se durante o desenvolvimento da busca binária, os testes que você queira
+ que sejam realizados sejam sempre os mesmos, você pode alterar a
+ segunda linha do arquivo `Makefile`, acrescentando a passagem de
+ argumentos na execução do programa, assim, todos os testes (além da
+ compilação do código há cada mudança nele) já serão executados ao
+ utilizar o comando `make`.
+
+Fazendo essa alteração a partir do editor de textos nano:
+
+![alterando o arquivo Makefile](images/make_alterado.jpg)
+
+Executando novamente o comando `make`:
+
+![executando o Makefile alterado](images/make_02.jpg)
+
+Na saída podemos ver que vários erros foram encontrados durante os
+ testes, porém, isso já era esperado, pois o algoritmo que estava sendo
+ usado ao executar o `make` utiliza arredondamento para cima. Também é
+ importante mencionar que, embora a execução do `make` tenha
+ retornado erros, esses 10 erros são referentes aos testes da busca
+ binária que falharam.
 
 ## Motivo dos testes
 
@@ -357,17 +373,23 @@ Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
 
 ![teste com arredondamento para baixo](images/test_down.jpg)
 
-Dessa saída, devemos dar atenção as seguintes informações:
+Nessa saída não é possível ver os erros ou avisos de compilação, que
+ são mostrados antes da primeira linha da saída. Do que a imagem possui,
+ devemos dar atenção às seguintes informações:
 
 ![interpretando a saída](images/interpretando_01.jpg)
 
 Demarcado em amarelo, temos o comando usado para executar o
- binary_search, o mesmo comando presente na segunda linha do Makefile.
+ `binary_search`, o mesmo comando presente na segunda linha do
+ `Makefile`.
 
-Em vermelho temos toda a saída referente aos testes, sendo o resultado
- dos testes cada uma das linhas começada com `src/main.c`, onde temos
- entre os caracteres `:` alguma informação sobre o teste específico.
- Usando como exemplo o primeiro resultado (demarcado em azul) temos:
+Em vermelho temos toda a saída referente aos testes, gerada
+ exclusivamente a partir do uso do framework
+ [Unity](https://github.com/ThrowTheSwitch/Unity/tree/master), sendo o
+ resultado dos testes cada uma das linhas começada com `src/main.c`,
+ onde temos entre os caracteres `:` alguma informação sobre o teste
+ específico. Usando como exemplo o primeiro resultado (demarcado em
+ azul) temos:
 
 - `src/main.c` : é o arquivo onde a chamada do teste está, no caso,
  todos os testes são chamados no arquivo main.c, dentro da pasta src;
@@ -378,8 +400,9 @@ Em vermelho temos toda a saída referente aos testes, sendo o resultado
 
 Demarcado em roxo temos o total de testes realizados, seguido pelo total
  de testes que apresentaram falha e pelo total de testes que foram
- ignorados (nenhum teste é ignorado independente dos argumentos
- passados em `.binary_search`).
+ ignorados (na implementação desse projeto nenhum teste foi configurado
+ para ser ignorado, independentemente dos argumentos passados na
+ execução de `.binary_search`).
 
 Por fim, tanto na imagem a cima, quanto na imagem de baixo, temos linhas
  demarcadas em verde, essas são linhas que retornaram falha. Por tanto,
@@ -389,9 +412,12 @@ Por fim, tanto na imagem a cima, quanto na imagem de baixo, temos linhas
 ![interpretando a saída](images/interpretando_02.jpg)
 
 Ao combinar o **nome do teste** com a **descrição da falha**, obtemos a
- melhor indicação do motivo de seu ocorrimento. A falha pode ter
- ocorrido por diversas causa, como algum problema na implementação do
- arredondamento, ou alguma possiblidade não considerada no código.
+ melhor indicação do motivo de seu ocorrimento. Mas antes, é necessário
+ entender no que consiste um teste.
+
+### Como funciona um teste
+
+Os...
 
 ### Nome do teste
 
