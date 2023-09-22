@@ -111,7 +111,7 @@ No exemplo mostrado temos a representação da execução do algoritmo
  a busca binária será usada, ou apenas de qual é mais intuitiva de
  implementar.
 
-## binary_search()
+### binary_search()
 
 Dentro do arquivo **binary_search.c**, além da linha `#include
  "src/binary_search.h"`, existe apenas a declaração de uma função, sendo
@@ -426,12 +426,11 @@ Todos os testes possuem a descrição do que fazem em seu nome.
 Em geral, todos os testes tem seu nome iniciado com a palavra `test`
  seguido da palavra `top` ou `down`, inidicando qual tipo de
  arredondamento será considerado, arredondamento para baixo (down) ou
- arredondamento para cima (top).
-
-Depois, temos no nome algum número em formato texto (one, four, five,
- six ou seven), indicando quantos elementos o vetor onde é feito a busca
- possui. Alguns testes tem seu nome terminado por esse número, sendo
- esses, testes onde o elemento procurado está presente no vetor.
+ arredondamento para cima (top). Depois, temos no nome algum número em
+ formato texto (one, four, five, six ou seven), indicando quantos
+ elementos o vetor onde é feito a busca possui. Alguns testes tem seu
+ nome terminado por esse número, sendo esses, testes onde o elemento
+ procurado está presente no vetor.
 
 Os testes que possuem mais informação, ou seja, os testes onde o
  elemento procurado não está no vetor, possuem após a informação da
@@ -449,10 +448,10 @@ Os testes que possuem mais informação, ou seja, os testes onde o
 Por fim, temos três testes que não seguem esse padrão, e que são
  sempre executados, são eles:
 
-- test_empty : testa a busca para um vetor vazio;
-- test_one : testa a busca para um vetor com apenas um elemento, o mesmo
- que está sendo procurado;
-- test_one_nopath : igual ao de cima, mas na execução da
+- **test_empty** : testa a busca para um vetor vazio;
+- **test_one** : testa a busca para um vetor com apenas um elemento, o
+ mesmo que está sendo procurado;
+- **test_one_nopath** : igual ao de cima, mas na execução da
  `binary_search()` passa o valor `NULL` para o argumento `\*path`,
  indicando que não deve-se retornar o caminho percorrido.
 
@@ -470,42 +469,27 @@ Por fim, temos três testes que não seguem esse padrão, e que são
 
 ## Motivo dos testes
 
-Para interpretar o resultados dos testes, antes é necessário entender o
- motivo da criação deles, o que cada um deles vai testar de especial.
- Em geral eles testam quando ocorre e quando não ocorre arredondamento
- na execução do código, em outras palavras, quando o subvetor a ser
- analisado possui uma quantidade par e quando possui uma quantidade
- ímpar de elementos. Considerando também a sequência em que ambas
- possiblidades ocorrem.
+Embora aqueles testes que não seguem o esquema padrão de nome tenham o
+ motivo de sua criação explícitos em sua descrição, o motivo da criação
+ dos testes onde seus vetores possuem diferentes quantidades de
+ elementos não é tão clara. As diferentes quantidades de elementos estão
+ relacionadas à necessidade de arredondamento na execução da busca e a
+ não realização dele, considerando também a intercalação dessas duas
+ possibilidade. Isso para chaves específicas que geram um processamento
+ exclusivo da busca comparado com as outras quantidades de elementos.
+ Assim, usando como exemplo arredondamento para cima, em testes com:
 
-### Testes para casos especiais
-
-- **test_empty** : quando é feito a busca em um vetor com zero
- elementos. A busca deve retornar `NULL` e o vetor **\*path** não deve
- ser alterado ;
-- **test_one** : quando há apenas um elemento no vetor. A busca deve
- retornar o elemento e apenas ele deve fazer parte do vetor **\*path**;
-- **test_one_nopath** : quando há apenas um elemento no vetor. A busca
- deve retornar o elemento mas não deve manipular o vetor **\*path**;
-
-### Testes onde o arredondamento é importante
-
-Alguns testes abaixo podem se comportar de maneira semelhante dependendo
- do elemento procurado, mas a descrição deles informa o que eles tem
- como diferença principal. Além disso, as características citadas não
- levam em consideração quando o subvetor analisado possui apenas um
- elemento.
-
-- **test_top_four** : para encontrar o elemento, a busca realiza
- dois arredondamentos consecutivos; 
-- **test_top_five** : para encontrar o elemento, a busca primeiramente
- compara o elemento no centro do vetor, e depois realiza um
- arredondamento;
-- **test_top_six** : para encontrar o elemento, a busca primeiramente
- faz um arredondamento e em seguida compara apenas elementos que estão
- no centro dos subvetores encontrados;
-- **test_top_seven** : para encontrar o elemento, a busca apenas compara
- elementos que estão no centro do conjunto analisado;
+- **quatro elementos** : a busca realiza dois arredondamentos
+ consecutivos. Ao passar as chaves _3_ e _5_;
+- **cinco elementos** : a busca primeiramente compara o elemento no
+ centro do vetor (não é necessário usar arredondamento nesse passo), e
+ depois realiza um arredondamento. Ao passar as chaves _3, 5, 11_ e
+ _13_;
+- **seis elementos** : a busca primeiramente faz um arredondamento e em
+ seguida compara apenas elementos que estão no centro dos subvetores
+ encontrados. Ao passar as chaves _3, 5_ e _7_;
+- **sete elementos** : a busca apenas compara elementos que estão no
+ centro do conjunto analisado, para todos as chaves;
 
 Assim, com todos os testes mencionado é possível saber se a busca está:
 
@@ -524,20 +508,8 @@ Assim, com todos os testes mencionado é possível saber se a busca está:
 
 Embora os testes mencionados realizem apenas arredondamento para cima,
  os testes com arredondamento para baixo se comportaram de maneira
- igual.
-
-Agora, em relação aos testes que não encontram o elemento prcurado,
- podemos saber se a busca binária se comporta corretamente quando é
- esperado que:
-
-- ela encontre o maior elemento detre aqueles com o atributo chave
- menores que o valor de `key`;
-- ela encontre o menor elemento detre aqueles com o atributo chave
- maiores que o valor de `key`;
-- seja retornado `NULL` quando não é possível retornar um elemento menor
- que o elemento procurado;
-- seja retornado `NULL` quando não é possível retornar um elemento maior
- que o elemento procurado;
+ igual. Também temos um comportamento semelhante para teste onde a chave
+ pesquisada não está no vetor.
 
 ## A fazer
 
@@ -553,12 +525,13 @@ Agora, em relação aos testes que não encontram o elemento prcurado,
 	- [X] não encontrados retornando o predecessor
 	- [X] não encontrados retornando o sucessor
 - [X] criar testes com mensagens
-- [ ] melhorar mensagens nos testes
+- [X] melhorar mensagens nos testes
 - [X] permitir maior interação com o que o usuário deseja testar
 - [X] facilitar interação com o usuário
-- [ ] escrever o readme
+- [X] escrever o readme
 	- [X] descrever o funcionamento da busca binária
 	- [X] descrever como executar o programa
-	- [ ] descrever como analisar os erros encontrados
+	- [X] descrever como analisar os erros encontrados
 	- [X] descrever o motivo de cada teste
+- [ ] Melhorar e corrigir erros no README
 - [ ] criar arquivo explicando como cada teste funciona
