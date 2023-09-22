@@ -16,8 +16,8 @@ Os testes criados tentam englobar as diferentes possibilidades de
  implementada.
 
 :wrench: Esse projeto foi implementado utilizando o framework
- [Unity](https://github.com/ThrowTheSwitch/Unity/tree/master), que
- auxilia na criação de testes unitários construídos em C
+ **[Unity](https://github.com/ThrowTheSwitch/Unity/tree/master)**, que
+ auxilia na criação de testes unitários construídos em C.
 
 :bangbang: _**Obs:**_ os testes criados consideram que o vetor
  processado é ordenado e não possui elementos repetidos.
@@ -294,6 +294,180 @@ Na saída podemos ver que vários erros foram encontrados durante os
  retornado erros, esses 10 erros são referentes aos testes da busca
  binária que falharam.
 
+## Interpretando as saídas dos testes
+
+Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
+ partir da execução do comando `make` com o arquivo Makefile alterado
+ para realizar os testes com arredondamento para baixo:
+
+![teste com arredondamento para baixo](images/test_down.jpg)
+
+Nessa saída não é possível ver os erros ou avisos de compilação, que
+ são mostrados antes da primeira linha da saída. Do que a imagem possui,
+ devemos dar atenção às seguintes informações:
+
+![interpretando a saída](images/interpretando_01.jpg)
+
+Demarcado em amarelo, temos o comando usado para executar o
+ `binary_search`, o mesmo comando presente na segunda linha do
+ `Makefile`.
+
+Em vermelho temos toda a saída referente aos testes, gerada
+ exclusivamente a partir do uso do framework
+ [Unity](https://github.com/ThrowTheSwitch/Unity/tree/master), sendo o
+ resultado dos testes cada uma das linhas começada com `src/main.c`,
+ onde temos entre os caracteres `:` alguma informação sobre o teste
+ específico. Usando como exemplo o primeiro resultado (demarcado em
+ azul) temos:
+
+- `src/main.c` : é o arquivo onde a chamada do teste está, no caso,
+ todos os testes são chamados no arquivo main.c, dentro da pasta src;
+- `28` : a linha onde o teste foi chamado;
+- `test_empty` : o nome do teste;
+- `PASS` : o resultado do teste, nesse caso significa que a busca
+ binária implementada passou no teste;
+
+Demarcado em roxo temos o total de testes realizados, seguido pelo total
+ de testes que apresentaram falha e pelo total de testes que foram
+ ignorados (na implementação desse projeto nenhum teste foi configurado
+ para ser ignorado, independentemente dos argumentos passados na
+ execução de `.binary_search`).
+
+Por fim, tanto na imagem a cima, quanto na imagem de baixo, temos linhas
+ demarcadas em verde, essas são linhas que retornaram falha. Por tanto,
+ no lugar de `PASS`, como na linha demarcada em azul, há a palavra
+ `FAIL`, e após dela, temos a descrição da falha.
+
+![interpretando a saída](images/interpretando_02.jpg)
+
+Ao combinar o **nome do teste** com a **descrição da falha**, obtemos a
+ melhor indicação do motivo de seu ocorrimento. Mas antes, é necessário
+ entender no que consiste um teste.
+
+### O que os testes fazem
+
+Os testes consistem na execução da busca binária em vários ambientes
+ diferentes, onde sua solução já é conhecida, preparados para englobar
+ todas as possibilidades na execução da busca, considerando:
+
+- o dado procurado estar e não estar no vetor;
+- o vetor possuir uma quantidade par e uma quantidade ímpar de
+ elementos;
+- o vetor ser vazio;
+- o vetor ter apenas um elemento;
+- ocorrer arredondamentos consecutivos, não ocorrer arredondamentos, ou
+ a intercalação dessas duas possibilidades;
+- ser requisitado o caminho da busca ou não ser requisitado.
+
+Em geral, o **ambiente do teste** é composto por um vetor com _n_
+ números primos (a partir do 3) do tipo `typedef long long int lli` onde
+ a busca ocorrerá, e um vetor de chaves a serem pesquisadas. Caso seja
+ esperado que a `binary_search()` encontre o dado pesquisado, esse vetor
+ será identico ao vetor onde a busca será feita, caso não seja esperado,
+ o vetor será composto pelos _n_ números que antecedem os elementos do
+ vetor de primos (o número que precede 3 é o número 2, assim por
+ diante), mais um elemento igual ao antecessor do próximo primo
+ referente ao último elemento.
+
+**Por exemplo**, se _n_ for igual a 5, o vetor de primos será _{3, 5, 7,
+ 11, 13}_, e o vetor de chaves será _{2, 4, 6, 10, 12, 16}_. 
+
+Na execução do teste, a busca binária será executada para cada uma das
+ chaves, assim, o teste só resultará em sucesso caso todos os retornos
+ da busca estejam de acordo com as chaves passadas, considerando o calor
+ de `ifnotfound`. Não só isso, mas o **ambiente do teste** também possui
+ o caminho esperado que a busca percorra, o qual será comparado com o
+ vetor **path** após a execução da busca.
+
+Por tanto, o teste seguirá os passos:
+
+- configurar o ambiente de teste;
+- executar a busca das _n_ (ou _n+1_ vezes caso seja testado o retorno
+ quando o elemento buscado não está no vetor) _chaves_ dentro do _vetor
+ de primos_;
+- comparar o retorno da função com o valor já esperado;
+- comparar o caminho percorrido pela função com o caminho já esperado.
+
+### Decrição da falha
+
+A sua descrição será referente ao primeiro comportamento inesperado.
+ Caso a primeira comparação do teste não esteja de acordo, a descrição
+ da falha será semelhante à descrição da linha demarcada em verde na
+ segunda imagem à cima. Essas saídas possuem o formato `Expected x Was
+ y. Searching z`, onde:
+
+- **x** : representa o retorno esperado que a função `binary_search()`
+ devolvesse;
+- **y** : representa o retorno que a busca de fato devolveu;
+- **z** : representa a chave procurada que gerou a falha;
+
+Se o retorno da função estiver de acordo, mas o caminho percorrido não
+ esteja, a descrição da falha terá uma informção extra antes de
+ `Expected x` com o formato `Element w`, onde **w** representa a
+ primeira posição de **path** que não está de acordo com o esperado.
+
+
+**Por exemplo**: a falha `Element 0 Expect 5 Was 7. Searching 3.`
+ informa que ao passar a chave _3_ para a busca binária, embora o
+ retorno da função tenha sido correto (essa informção é implicita, pois
+ se não fosse verdade, a descrição da falha seria referente à essa
+ informação, e não ao caminho percorrido), o primeiro elemento
+ processado no caminho percorrido pela função possui valor _7_, porém
+ era esperado que esse valor fosse _5_.
+
+Já a falha `Expected 19 Was 2. Searching 20` informa que ao passar a
+ chave _20_, o retorno da busca foi o valor _2_, quando na verdade
+ deveria ser _19_.
+
+### Nome do teste
+
+Todos os testes possuem a descrição do que fazem em seu nome.
+
+Em geral, todos os testes tem seu nome iniciado com a palavra `test`
+ seguido da palavra `top` ou `down`, inidicando qual tipo de
+ arredondamento será considerado, arredondamento para baixo (down) ou
+ arredondamento para cima (top).
+
+Depois, temos no nome algum número em formato texto (one, four, five,
+ six ou seven), indicando quantos elementos o vetor onde é feito a busca
+ possui. Alguns testes tem seu nome terminado por esse número, sendo
+ esses, testes onde o elemento procurado está presente no vetor.
+
+Os testes que possuem mais informação, ou seja, os testes onde o
+ elemento procurado não está no vetor, possuem após a informação da
+ quantidade de elementos, as palavras `not_found`, e após elas, podem ou
+ não ter a palavra `bef` (de before) ou a palavra `next`.
+
+- Caso o nome do teste termine em `not_found`, significa que na execução
+ da função `binary_search()` será passado para o argumento `ifnotfound`
+ o valor `0`;
+- Caso o nome termine em `bef`, significa que foi passado para o
+ argumento `ifnotfound` o valor `-1`;
+- Caso o nome termine em `next`, significa que foi passado para o
+ argumento `ifnotfound` o valor `1`,
+
+Por fim, temos três testes que não seguem esse padrão, e que são
+ sempre executados, são eles:
+
+- test_empty : testa a busca para um vetor vazio;
+- test_one : testa a busca para um vetor com apenas um elemento, o mesmo
+ que está sendo procurado;
+- test_one_nopath : igual ao de cima, mas na execução da
+ `binary_search()` passa o valor `NULL` para o argumento `\*path`,
+ indicando que não deve-se retornar o caminho percorrido.
+
+**Por exemplo**, o teste `test_top_five_not_found_bef` testa a busca
+ binária implementada com arredondamento para cima utilizando um vetor
+ de cinco elementos, onde o elemento procurado não está presente, sendo
+ esperado que ao não encontrar seja retornado o maior elemento detre
+ aqueles com o atributo chave menores que o valor de `key`. O teste
+ aqueles com o atributo chave menores que o valor de `key`. O teste
+ `test_down_seven_not_found_next` por sua vez, testa a busca binária
+ implementada com arredondamento para baixo ultilizando um vetor de sete
+ elementos, onde o elemento procurado não está presente, sendo esperado
+ que ao não encontrá-lo seja retornado o menor elemento detre aqueles
+ com o atributo chave maoires que o valor de `key`.
+
 ## Motivo dos testes
 
 Para interpretar o resultados dos testes, antes é necessário entender o
@@ -364,110 +538,6 @@ Agora, em relação aos testes que não encontram o elemento prcurado,
  que o elemento procurado;
 - seja retornado `NULL` quando não é possível retornar um elemento maior
  que o elemento procurado;
-
-## Interpretando as saídas dos testes
-
-Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
- partir da execução do comando `make` com o arquivo Makefile alterado
- para realizar os testes com arredondamento para baixo:
-
-![teste com arredondamento para baixo](images/test_down.jpg)
-
-Nessa saída não é possível ver os erros ou avisos de compilação, que
- são mostrados antes da primeira linha da saída. Do que a imagem possui,
- devemos dar atenção às seguintes informações:
-
-![interpretando a saída](images/interpretando_01.jpg)
-
-Demarcado em amarelo, temos o comando usado para executar o
- `binary_search`, o mesmo comando presente na segunda linha do
- `Makefile`.
-
-Em vermelho temos toda a saída referente aos testes, gerada
- exclusivamente a partir do uso do framework
- [Unity](https://github.com/ThrowTheSwitch/Unity/tree/master), sendo o
- resultado dos testes cada uma das linhas começada com `src/main.c`,
- onde temos entre os caracteres `:` alguma informação sobre o teste
- específico. Usando como exemplo o primeiro resultado (demarcado em
- azul) temos:
-
-- `src/main.c` : é o arquivo onde a chamada do teste está, no caso,
- todos os testes são chamados no arquivo main.c, dentro da pasta src;
-- `28` : a linha onde o teste foi chamado;
-- `test_empty` : o nome do teste;
-- `PASS` : o resultado do teste, nesse caso significa que a busca
- binária implementada passou no teste;
-
-Demarcado em roxo temos o total de testes realizados, seguido pelo total
- de testes que apresentaram falha e pelo total de testes que foram
- ignorados (na implementação desse projeto nenhum teste foi configurado
- para ser ignorado, independentemente dos argumentos passados na
- execução de `.binary_search`).
-
-Por fim, tanto na imagem a cima, quanto na imagem de baixo, temos linhas
- demarcadas em verde, essas são linhas que retornaram falha. Por tanto,
- no lugar de `PASS`, como na linha demarcada em azul, há a palavra
- `FAIL`, e após dela, temos a descrição da falha.
-
-![interpretando a saída](images/interpretando_02.jpg)
-
-Ao combinar o **nome do teste** com a **descrição da falha**, obtemos a
- melhor indicação do motivo de seu ocorrimento. Mas antes, é necessário
- entender no que consiste um teste.
-
-### Como funciona um teste
-
-Os...
-
-### Nome do teste
-
-Todos os testes possuem a descrição do que fazem em seu nome.
-
-Em geral, todos os testes tem seu nome iniciado com a palavra `test`
- seguido da palavra `top` ou `down`, inidicando qual tipo de
- arredondamento será considerado, arredondamento para baixo (down) ou
- arredondamento para cima (top).
-
-Depois, temos no nome algum número em formato texto (one, four, five,
- six ou seven), indicando quantos elementos o vetor onde é feito a busca
- possui. Alguns testes tem seu nome terminado por esse número, sendo
- esses, testes onde o elemento procurado está presente no vetor.
-
-Os testes que possuem mais informação, ou seja, os testes onde o
- elemento procurado não está no vetor, possuem após a informação da
- quantidade de elementos, as palavras `not_found`, e após elas, podem ou
- não ter a palavra `bef` (de before) ou a palavra `next`.
-
-- Caso o nome do teste termine em `not_found`, significa que na execução
- da função `binary_search()` será passado para o argumento `ifnotfound`
- o valor `0`;
-- Caso o nome termine em `bef`, significa que foi passado para o
- argumento `ifnotfound` o valor `-1`;
-- Caso o nome termine em `next`, significa que foi passado para o
- argumento `ifnotfound` o valor `1`,
-
-Por fim, temos três testes que não seguem esse padrão, e que são
- sempre executados, são eles:
-
-- test_empty : testa a busca para um vetor vazio;
-- test_one : testa a busca para um vetor com apenas um elemento, o mesmo
- que está sendo procurado;
-- test_one_nopath : igual ao de cima, mas na execução da
- `binary_search()` passa o valor `NULL` para o argumento `\*path`,
- indicando que não deve-se retornar o caminho percorrido.
-
-Por exemplo, o teste `test_top_five_not_found_bef` testa a busca binária
- implementada com arredondamento para cima utilizando um vetor de cinco
- elementos, onde o elemento procurado não está presente, sendo esperado
- que ao não encontrar seja retornado o maior elemento detre aqueles com
- o atributo chave menores que o valor de `key`. O teste
- `test_down_seven_not_found_next` por sua vez, testa a busca binária
- implementada com arredondamento para baixo ultilizando um vetor de sete
- elementos, onde o elemento procurado não está presente, sendo esperado
- que ao não encontrá-lo seja retornado o menor elemento detre aqueles
- com o atributo chave maoires que o valor de `key`.
-
-### Decrição da falha
 
 ## A fazer
 
