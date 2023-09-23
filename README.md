@@ -139,7 +139,7 @@ Os argumentos da binary_search():
 
 - **\*key** : esse ponteiro aponta para a chave usada na busca, ou seja,
  o elemento procurado deve possuir seu atributo chave igual ao valor de
- `\*key`.
+ `*key`.
 
 - **\*base** : esse ponteiro aponta para o vetor onde a busca será
  feita. Lembrando que esse vetor deve estar ordenado.
@@ -163,10 +163,10 @@ Os argumentos da binary_search():
  algoritmo até chegar na solução. Ele pode ser igual a `NULL`, indicando
  que o caminho para chegar à solução não é necessário (neste caso,
  `path` não deve ser manipulado), ou ser o endereço de um vetor de
- inteiros pré alocado, onde na primeira posição do vetor deve ser
- armazenado o valor do primeiro elemento processado na busca, na segunda
- posição do vetor armazenado o valor do segundo elemento processado na
- busca, e assim por diante.
+ inteiros pré alocado, onde durante a busca, na primeira posição do
+ vetor deve ser armazenado o valor do primeiro elemento processado na
+ busca, na segunda posição do vetor armazenado o valor do segundo
+ elemento processado na busca, e assim por diante.
 
 - **ifnotfound** : esse inteiro informa qual deve ser o retorno da
  função caso o elemento buscado não seja encontrado. `ifnotfound` pode
@@ -179,22 +179,22 @@ Os argumentos da binary_search():
 	 atributo chave maoires que o valor de `key`.
 
 - o **retorno** da função, nada mais é que o endereço do elemento
- procurado. Porém a função deve retornar `NULL` caso ocorra algum dos
+ procurado. Porém, a função deve retornar `NULL` caso ocorra algum dos
  três casos:
 
 	- o elemento não foi encontrado e `ifnotfound` é igual a 0;
 	- o elemento não foi encontrado, `ifnotfound` é igual a -1 e o valor
-	 de `\*key` é menor que o valor do atributo chave do primeiro
+	 de `*key` é menor que o valor do atributo chave do primeiro
 	 elemento dentro do vetor;
 	- o elemento não foi encontrado, `ifnotfound` é igual a 1 e o valor
-	 de `\*key` é maior que o valor do atributo chave do último elemento
+	 de `*key` é maior que o valor do atributo chave do último elemento
 	 dentro do vetor.
 
-Um _exemplo_ do uso dessa função seria:
+Um exemplo do uso dessa função seria:
 
 ```
 /* consirando que a função de comparação possui o nome comp_int e já
- tenja sido implementada em outro local */
+ tenha sido implementada em outro local */
 
 int v[] = {3, 5, 7, 11};
 int caminho[4];
@@ -297,22 +297,22 @@ Na saída podemos ver que vários erros foram encontrados durante os
 ## Interpretando as saídas dos testes
 
 Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
- partir da execução do comando `make` com o arquivo Makefile alterado
- para realizar os testes com arredondamento para baixo:
+ partir da execução do comando `make` com o arquivo `Makefile` alterado
+ para realizar testes com arredondamento para baixo:
 
 ![teste com arredondamento para baixo](images/test_down.jpg)
 
 Nessa saída não é possível ver os erros ou avisos de compilação, que
- são mostrados antes da primeira linha da saída. Do que a imagem possui,
- devemos dar atenção às seguintes informações:
+ são mostrados antes da primeira linha da imagem mostrada. Do que está
+ presente na imagem, devemos dar atenção às seguintes informações:
 
 ![interpretando a saída](images/interpretando_01.jpg)
 
-Demarcado em amarelo, temos o comando usado para executar o
+- Demarcado em amarelo, temos o comando usado para executar o
  `binary_search`, o mesmo comando presente na segunda linha do
  `Makefile`.
 
-Em vermelho temos toda a saída referente aos testes, gerada
+- Em vermelho temos toda a saída referente aos testes, gerada
  exclusivamente a partir do uso do framework
  [Unity](https://github.com/ThrowTheSwitch/Unity/tree/master), sendo o
  resultado dos testes cada uma das linhas começada com `src/main.c`,
@@ -320,23 +320,24 @@ Em vermelho temos toda a saída referente aos testes, gerada
  específico. Usando como exemplo o primeiro resultado (demarcado em
  azul) temos:
 
-- `src/main.c` : é o arquivo onde a chamada do teste está, no caso,
- todos os testes são chamados no arquivo main.c, dentro da pasta src;
-- `28` : a linha onde o teste foi chamado;
-- `test_empty` : o nome do teste;
-- `PASS` : o resultado do teste, nesse caso significa que a busca
- binária implementada passou no teste;
+	- `src/main.c` : é o arquivo onde a chamada do teste está, no caso,
+	 todos os testes são chamados no arquivo main.c, dentro da pasta
+	 src;
+	- `28` : a linha onde o teste foi chamado;
+	- `test_empty` : o nome do teste;
+	- `PASS` : o resultado do teste, nesse caso significa que a busca
+	 binária implementada passou no teste;
 
-Demarcado em roxo temos o total de testes realizados, seguido pelo total
- de testes que apresentaram falha e pelo total de testes que foram
+- Demarcado em roxo temos o total de testes realizados, seguido pelo
+ total de testes que apresentaram falha e pelo total de testes que foram
  ignorados (na implementação desse projeto nenhum teste foi configurado
  para ser ignorado, independentemente dos argumentos passados na
- execução de `.binary_search`).
+ execução do `binary_search`).
 
-Por fim, tanto na imagem a cima, quanto na imagem de baixo, temos linhas
- demarcadas em verde, essas são linhas que retornaram falha. Por tanto,
- no lugar de `PASS`, como na linha demarcada em azul, há a palavra
- `FAIL`, e após dela, temos a descrição da falha.
+- Por fim, tanto na imagem a cima, quanto na imagem a baixo temos linhas
+ demarcadas em verde, esses são testes que falharam. Por tanto, no lugar
+ de `PASS`, como na linha demarcada em azul, há a palavra `FAIL`, e após
+ ela temos a descrição da falha.
 
 ![interpretando a saída](images/interpretando_02.jpg)
 
@@ -351,7 +352,7 @@ Os testes consistem na execução da busca binária em vários ambientes
  todas as possibilidades na execução da busca, considerando:
 
 - o dado procurado estar e não estar no vetor;
-- o vetor possuir uma quantidade par e uma quantidade ímpar de
+- o vetor possuir uma quantidade par ou uma quantidade ímpar de
  elementos;
 - o vetor ser vazio;
 - o vetor ter apenas um elemento;
@@ -363,7 +364,7 @@ Em geral, o **ambiente do teste** é composto por um vetor com _n_
  números primos (a partir do 3) do tipo `typedef long long int lli` onde
  a busca ocorrerá, e um vetor de chaves a serem pesquisadas. Caso seja
  esperado que a `binary_search()` encontre o dado pesquisado, esse vetor
- será identico ao vetor onde a busca será feita, caso não seja esperado,
+ será idêntico ao vetor onde a busca será feita, caso não seja esperado,
  o vetor será composto pelos _n_ números que antecedem os elementos do
  vetor de primos (o número que precede 3 é o número 2, assim por
  diante), mais um elemento igual ao antecessor do próximo primo
@@ -373,18 +374,18 @@ Em geral, o **ambiente do teste** é composto por um vetor com _n_
  11, 13}_, e o vetor de chaves será _{2, 4, 6, 10, 12, 16}_. 
 
 Na execução do teste, a busca binária será executada para cada uma das
- chaves, assim, o teste só resultará em sucesso caso todos os retornos
- da busca estejam de acordo com as chaves passadas, considerando o calor
- de `ifnotfound`. Não só isso, mas o **ambiente do teste** também possui
- o caminho esperado que a busca percorra, o qual será comparado com o
- vetor **path** após a execução da busca.
+ chaves utilizando o mesmo vetor de primos, assim, o teste só resultará
+ em sucesso caso todos os retornos da busca estejam de acordo com as
+ chaves passadas, considerando o valor de `ifnotfound`. Não só isso, mas
+ o **ambiente do teste** também possui o caminho esperado que a busca
+ percorra, o qual será comparado com o vetor **path** após a execução da
+ busca.
 
 Por tanto, o teste seguirá os passos:
 
 - configurar o ambiente de teste;
-- executar a busca das _n_ (ou _n+1_ vezes caso seja testado o retorno
- quando o elemento buscado não está no vetor) _chaves_ dentro do _vetor
- de primos_;
+- executar a busca das _n_ (ou _n+1_ caso seja testado o retorno quando
+ o elemento buscado não está no vetor) chaves dentro do vetor de primos;
 - comparar o retorno da função com o valor já esperado;
 - comparar o caminho percorrido pela função com o caminho já esperado.
 
@@ -393,16 +394,16 @@ Por tanto, o teste seguirá os passos:
 A sua descrição será referente ao primeiro comportamento inesperado.
  Caso a primeira comparação do teste não esteja de acordo, a descrição
  da falha será semelhante à descrição da linha demarcada em verde na
- segunda imagem à cima. Essas saídas possuem o formato `Expected x Was
+ segunda imagem a cima. Essas saídas possuem o formato `Expected x Was
  y. Searching z`, onde:
 
 - **x** : representa o retorno esperado que a função `binary_search()`
  devolvesse;
 - **y** : representa o retorno que a busca de fato devolveu;
-- **z** : representa a chave procurada que gerou a falha;
+- **z** : representa a chave procurada na ocorrência da falha;
 
 Se o retorno da função estiver de acordo, mas o caminho percorrido não
- esteja, a descrição da falha terá uma informção extra antes de
+ esteja, a descrição da falha terá uma informação extra antes de
  `Expected x` com o formato `Element w`, onde **w** representa a
  primeira posição de **path** que não está de acordo com o esperado.
 
@@ -419,18 +420,26 @@ Já a falha `Expected 19 Was 2. Searching 20` informa que ao passar a
  chave _20_, o retorno da busca foi o valor _2_, quando na verdade
  deveria ser _19_.
 
+:bangbang: _**Obs:**_ esses testes não possuem tratamento para
+ _segmentation fault_ ou erros do tipo, por tanto, a única indicação da
+ origem desse erro é o teste que estava sendo executado quando ele
+ aconteceu. O nome do teste não estará presente na saída do programa,
+ sendo necessário identificá-lo com base nos argumentos passados na
+ execução do programa e no último teste executado até o fim (o último
+ presente na saída). Para saber a sequência em que os testes são feitos
+ acesse [doc/sequence.txt](doc/sequence.txt).
+
 ### Nome do teste
 
-Todos os testes possuem a descrição do que fazem em seu nome.
-
-Em geral, todos os testes tem seu nome iniciado com a palavra `test`
- seguido da palavra `top` ou `down`, inidicando qual tipo de
- arredondamento será considerado, arredondamento para baixo (down) ou
- arredondamento para cima (top). Depois, temos no nome algum número em
- formato texto (one, four, five, six ou seven), indicando quantos
- elementos o vetor onde é feito a busca possui. Alguns testes tem seu
- nome terminado por esse número, sendo esses, testes onde o elemento
- procurado está presente no vetor.
+Todos os testes possuem a descrição do que fazem em seu nome. Em geral,
+ todos os testes tem seu nome iniciado com a palavra `test` seguido da
+ palavra `top` ou `down`, inidicando qual tipo de arredondamento será
+ considerado, arredondamento para baixo (down) ou arredondamento para
+ cima (top). Depois, temos no nome algum número em formato texto (one,
+ four, five, six ou seven), indicando quantos elementos o vetor onde é
+ feito a busca possui. Alguns testes tem seu nome terminado por esse
+ número, sendo estes, testes onde o elemento procurado está presente no
+ vetor e a busca deva encontrá-lo.
 
 Os testes que possuem mais informação, ou seja, os testes onde o
  elemento procurado não está no vetor, possuem após a informação da
@@ -446,38 +455,39 @@ Os testes que possuem mais informação, ou seja, os testes onde o
  argumento `ifnotfound` o valor `1`,
 
 Por fim, temos três testes que não seguem esse padrão, e que são
- sempre executados, são eles:
+ sempre executados. São eles:
 
 - **test_empty** : testa a busca para um vetor vazio;
 - **test_one** : testa a busca para um vetor com apenas um elemento, o
  mesmo que está sendo procurado;
 - **test_one_nopath** : igual ao de cima, mas na execução da
- `binary_search()` passa o valor `NULL` para o argumento `\*path`,
+ `binary_search()` passa o valor `NULL` para o argumento `*path`,
  indicando que não deve-se retornar o caminho percorrido.
 
 **Por exemplo**, o teste `test_top_five_not_found_bef` testa a busca
  binária implementada com arredondamento para cima utilizando um vetor
  de cinco elementos, onde o elemento procurado não está presente, sendo
- esperado que ao não encontrar seja retornado o maior elemento detre
- aqueles com o atributo chave menores que o valor de `key`. O teste
- aqueles com o atributo chave menores que o valor de `key`. O teste
- `test_down_seven_not_found_next` por sua vez, testa a busca binária
- implementada com arredondamento para baixo ultilizando um vetor de sete
- elementos, onde o elemento procurado não está presente, sendo esperado
- que ao não encontrá-lo seja retornado o menor elemento detre aqueles
- com o atributo chave maoires que o valor de `key`.
+ esperado que ao não encontrá-lo seja retornado o maior elemento detre
+ aqueles com o atributo chave menores que o valor de `key`.
 
-## Motivo dos testes
+O teste `test_down_seven_not_found_next` por sua vez, testa a busca
+ binária implementada com arredondamento para baixo ultilizando um vetor
+ de sete elementos, onde o elemento procurado não está presente, sendo
+ esperado que ao não encontrá-lo seja retornado o menor elemento detre
+ aqueles com o atributo chave maoires que o valor de `key`.
+
+### Motivo dos testes
 
 Embora aqueles testes que não seguem o esquema padrão de nome tenham o
  motivo de sua criação explícitos em sua descrição, o motivo da criação
  dos testes onde seus vetores possuem diferentes quantidades de
  elementos não é tão clara. As diferentes quantidades de elementos estão
  relacionadas à necessidade de arredondamento na execução da busca e a
- não realização dele, considerando também a intercalação dessas duas
+ não necessidade dele, considerando também a intercalação dessas duas
  possibilidade. Isso para chaves específicas que geram um processamento
  exclusivo da busca comparado com as outras quantidades de elementos.
- Assim, usando como exemplo arredondamento para cima, em testes com:
+ Assim, usando como exemplo arredondamento para cima, em testes com o
+ vetor possuindo:
 
 - **quatro elementos** : a busca realiza dois arredondamentos
  consecutivos. Ao passar as chaves _3_ e _5_;
@@ -489,7 +499,7 @@ Embora aqueles testes que não seguem o esquema padrão de nome tenham o
  seguida compara apenas elementos que estão no centro dos subvetores
  encontrados. Ao passar as chaves _3, 5_ e _7_;
 - **sete elementos** : a busca apenas compara elementos que estão no
- centro do conjunto analisado, para todos as chaves;
+ centro do conjunto analisado, para todas as chaves;
 
 Assim, com todos os testes mencionado é possível saber se a busca está:
 
@@ -510,6 +520,10 @@ Embora os testes mencionados realizem apenas arredondamento para cima,
  os testes com arredondamento para baixo se comportaram de maneira
  igual. Também temos um comportamento semelhante para teste onde a chave
  pesquisada não está no vetor.
+
+Para saber como um teste específico funciona, qual seu ambiente e outras
+ informações mais detalhadas sobre ele, acesse
+ [doc/tests.txt](doc/tests.txt).
 
 ## A fazer
 
@@ -533,5 +547,7 @@ Embora os testes mencionados realizem apenas arredondamento para cima,
 	- [X] descrever como executar o programa
 	- [X] descrever como analisar os erros encontrados
 	- [X] descrever o motivo de cada teste
-- [ ] Melhorar e corrigir erros no README
-- [ ] criar arquivo explicando como cada teste funciona
+- [X] corrigir erros no README
+- [ ] escrever arquivo tests.txt
+- [ ] escrever arquivo sequence.txt
+- [ ] melhorar o README
