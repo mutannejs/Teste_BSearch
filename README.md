@@ -548,6 +548,6 @@ Para saber como um teste específico funciona, qual seu ambiente e outras
 	- [X] descrever como analisar os erros encontrados
 	- [X] descrever o motivo de cada teste
 - [X] corrigir erros no README
-- [ ] escrever arquivo tests.txt
+- [X] escrever arquivo tests.txt
 - [X] escrever arquivo sequence.txt
 - [ ] melhorar o README
