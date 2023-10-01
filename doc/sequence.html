@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sequência Testes BSearch</title>
+	</head>
+	<body>
+		<h1>Sequência Testes BSearch</h1>
+		
+		<p>
+			Neste arquivo temos a sequência em que os testes são feitos
+			para cada combinação de argumentos possíveis de serem
+			passados na execução do programa:
+		</p>
+		<br>
+		
+		<pre>
+./binary_search	ou	./binary_search t	ou ./binary_search 0
+	ou	./binary_search t 0
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_top_four
+test_top_five
+test_top_six
+test_top_seven
+test_top_four_not_found
+test_top_five_not_found
+test_top_six_not_found
+test_top_seven_not_found
+------------------------------------------------------------------------
+
+./binary_search	-1	ou	./binary_search t -1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found_bef
+test_top_four
+test_top_five
+test_top_six
+test_top_seven
+test_top_four_not_found_bef
+test_top_five_not_found_bef
+test_top_six_not_found_bef
+test_top_seven_not_found_bef
+------------------------------------------------------------------------
+
+./binary_search	1	ou	./binary_search t 1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found_next
+test_top_four
+test_top_five
+test_top_six
+test_top_seven
+test_top_four_not_found_next
+test_top_five_not_found_next
+test_top_six_not_found_next
+test_top_seven_not_found_next
+------------------------------------------------------------------------
+
+./binary_search	0 -1	ou	./binary_search t 0 -1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_one_not_found_bef
+test_top_four
+test_top_five
+test_top_six
+test_top_seven
+test_top_four_not_found
+test_top_five_not_found
+test_top_six_not_found
+test_top_seven_not_found
+test_top_four_not_found_bef
+test_top_five_not_found_bef
+test_top_six_not_found_bef
+test_top_seven_not_found_bef
+------------------------------------------------------------------------
+
+./binary_search	0 1	ou	./binary_search t 0 1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_one_not_found_next
+test_top_four
+test_top_five
+test_top_six
+test_top_seven
+test_top_four_not_found
+test_top_five_not_found
+test_top_six_not_found
+test_top_seven_not_found
+test_top_four_not_found_next
+test_top_five_not_found_next
+test_top_six_not_found_next
+test_top_seven_not_found_next
+------------------------------------------------------------------------
+
+./binary_search	-1 1	ou	./binary_search t -1 1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found_bef
+test_one_not_found_next
+test_top_four
+test_top_five
+test_top_six
+test_top_seven
+test_top_four_not_found_bef
+test_top_five_not_found_bef
+test_top_six_not_found_bef
+test_top_seven_not_found_bef
+test_top_four_not_found_next
+test_top_five_not_found_next
+test_top_six_not_found_next
+test_top_seven_not_found_next
+------------------------------------------------------------------------
+
+./binary_search	-1 0 1	ou	./binary_search t -1 0 1
+	ou	./binary_search 2	ou	./binary_search t 2
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_one_not_found_bef
+test_one_not_found_next
+test_top_four
+test_top_five
+test_top_six
+test_top_seven
+test_top_four_not_found
+test_top_five_not_found
+test_top_six_not_found
+test_top_seven_not_found
+test_top_four_not_found_bef
+test_top_five_not_found_bef
+test_top_six_not_found_bef
+test_top_seven_not_found_bef
+test_top_four_not_found_next
+test_top_five_not_found_next
+test_top_six_not_found_next
+test_top_seven_not_found_next
+------------------------------------------------------------------------
+
+./binary_search d	ou ./binary_search d 0
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_down_four
+test_down_five
+test_down_six
+test_down_seven
+test_down_four_not_found
+test_down_five_not_found
+test_down_six_not_found
+test_down_seven_not_found
+------------------------------------------------------------------------
+
+./binary_search d -1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found_bef
+test_down_four
+test_down_five
+test_down_six
+test_down_seven
+test_down_four_not_found_bef
+test_down_five_not_found_bef
+test_down_six_not_found_bef
+test_down_seven_not_found_bef
+------------------------------------------------------------------------
+
+./binary_search d 1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found_next
+test_down_four
+test_down_five
+test_down_six
+test_down_seven
+test_down_four_not_found_next
+test_down_five_not_found_next
+test_down_six_not_found_next
+test_down_seven_not_found_next
+------------------------------------------------------------------------
+
+./binary_search d 0 -1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_one_not_found_bef
+test_down_four
+test_down_five
+test_down_six
+test_down_seven
+test_down_four_not_found
+test_down_five_not_found
+test_down_six_not_found
+test_down_seven_not_found
+test_down_four_not_found_bef
+test_down_five_not_found_bef
+test_down_six_not_found_bef
+test_down_seven_not_found_bef
+------------------------------------------------------------------------
+
+./binary_search d 0 1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_one_not_found_next
+test_down_four
+test_down_five
+test_down_six
+test_down_seven
+test_down_four_not_found
+test_down_five_not_found
+test_down_six_not_found
+test_down_seven_not_found
+test_down_four_not_found_next
+test_down_five_not_found_next
+test_down_six_not_found_next
+test_down_seven_not_found_next
+------------------------------------------------------------------------
+
+./binary_search d -1 1
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found_bef
+test_one_not_found_next
+test_down_four
+test_down_five
+test_down_six
+test_down_seven
+test_down_four_not_found_bef
+test_down_five_not_found_bef
+test_down_six_not_found_bef
+test_down_seven_not_found_bef
+test_down_four_not_found_next
+test_down_five_not_found_next
+test_down_six_not_found_next
+test_down_seven_not_found_next
+------------------------------------------------------------------------
+
+./binary_search d -1 0 1	ou	./binary_search 2
+
+test_empty
+test_one
+test_one_nopath
+test_one_not_found
+test_one_not_found_bef
+test_one_not_found_next
+test_down_four
+test_down_five
+test_down_six
+test_down_seven
+test_down_four_not_found
+test_down_five_not_found
+test_down_six_not_found
+test_down_seven_not_found
+test_down_four_not_found_bef
+test_down_five_not_found_bef
+test_down_six_not_found_bef
+test_down_seven_not_found_bef
+test_down_four_not_found_next
+test_down_five_not_found_next
+test_down_six_not_found_next
+test_down_seven_not_found_next
+		</pre>
+	</body>
+</html>

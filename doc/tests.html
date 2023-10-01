@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Testes BSearch</title>
+		<style>
+			#header, .nome {
+				color: white;
+			}
+			#header  {
+				position: sticky;
+				background-color: green;
+				top: 0;
+			}
+			.nome {
+				background-color: darkblue;
+			}
+			table {
+				border-collapse: collapse;
+				border-spacing: 0px;
+			}
+			caption {
+				padding: 10px;
+				caption-side: bottom;
+			}
+			table, th, td {
+				padding: 10px;
+				border: 2px solid gray;
+			}
+			th {
+				width: 20%;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<h1>Testes BSearch</h1>
+		
+		<p>
+			Neste arquivo temos os resultados e os caminhos esperados que
+			a busca	retorne para cada chave dentro de cada teste:
+		</p>
+		
+		<table>
+			<caption>
+				Dados passados e esperados como retorno na busca binária
+			</caption>
+			<thead id="header">
+				<tr>
+					<th>Quantidade de elementos</th>
+					<th>Key</th>
+					<th>Retorno esperado</th>
+					<th>Caminho esperado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="nome" colspan="4">test_empty</td>
+				</tr>
+				<tr>
+					<td>0</td>
+					<td>3</td>
+					<td>NULL</td>
+					<td>caminho não é modificado</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_one</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{0}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_one_nopath</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>3</td>
+					<td>3</td>
+					<td>NULL</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_one_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="2">1</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{0}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_one_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="2">1</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{0}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_one_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="2">1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{0}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_four</td>
+				</tr>
+				<tr>
+					<td rowspan="4">4</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_four_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="5">4</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_four_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="5">4</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>7</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_four_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="5">4</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_four</td>
+				</tr>
+				<tr>
+					<td rowspan="4">4</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{1, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{1, 2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{1, 2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_four_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="5">4</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{1, 2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{1, 2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_four_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="5">4</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>7</td>
+					<td>{1, 2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{1, 2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_four_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="5">4</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{1, 2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{1, 2, 3}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_five</td>
+				</tr>
+				<tr>
+					<td rowspan="5">5</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>13</td>
+					<td>13</td>
+					<td>{2, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_five_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="6">5</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{2, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_five_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="6">5</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>7</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>13</td>
+					<td>{2, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_five_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="6">5</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{2, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{2, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>13</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{2, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_five</td>
+				</tr>
+				<tr>
+					<td rowspan="5">5</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td>13</td>
+					<td>13</td>
+					<td>{2, 3, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_five_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="6">5</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{2, 3, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{2, 3, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_five_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="6">5</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>7</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{2, 3, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>13</td>
+					<td>{2, 3, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_five_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="6">5</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{2, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>13</td>
+					<td>{2, 3, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{2, 3, 4}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_six</td>
+				</tr>
+				<tr>
+					<td rowspan="6">6</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{3, 1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{3}</td>
+				</tr>
+				<tr>
+					<td>13</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>17</td>
+					<td>17</td>
+					<td>{3, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_six_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="7">6</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>NULL</td>
+					<td>{3, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_six_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="7">6</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>17</td>
+					<td>{3, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_six_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="7">6</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>17</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>NULL</td>
+					<td>{3, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_six</td>
+				</tr>
+				<tr>
+					<td rowspan="6">6</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>13</td>
+					<td>13</td>
+					<td>{2, 4}</td>
+				</tr>
+				<tr>
+					<td>17</td>
+					<td>17</td>
+					<td>{2, 4, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_six_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="7">6</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{2, 4, 5}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>NULL</td>
+					<td>{2, 4, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_six_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="7">6</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>6</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>13</td>
+					<td>{2, 4, 5}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>17</td>
+					<td>{2, 4, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_six_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="7">6</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{2, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{2, 0, 1}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>13</td>
+					<td>{2, 4, 3}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>17</td>
+					<td>{2, 4, 5}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>NULL</td>
+					<td>{2, 4, 5}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_seven</td>
+				</tr>
+				<tr>
+					<td rowspan="7">7</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{3, 1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{3}</td>
+				</tr>
+				<tr>
+					<td>13</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>17</td>
+					<td>17</td>
+					<td>{3, 5}</td>
+				</tr>
+				<tr>
+					<td>19</td>
+					<td>19</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_seven_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="8">7</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>NULL</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td>22</td>
+					<td>NULL</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_seven_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="8">7</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>17</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td>22</td>
+					<td>19</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_top_seven_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="8">7</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>17</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>19</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td>22</td>
+					<td>NULL</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_seven</td>
+				</tr>
+				<tr>
+					<td rowspan="7">7</td>
+					<td>3</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>5</td>
+					<td>{3, 1}</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>11</td>
+					<td>{3}</td>
+				</tr>
+				<tr>
+					<td>13</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>17</td>
+					<td>17</td>
+					<td>{3, 5}</td>
+				</tr>
+				<tr>
+					<td>19</td>
+					<td>19</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_seven_not_found</td>
+				</tr>
+				<tr>
+					<td rowspan="8">7</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>NULL</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>NULL</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NULL</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>NULL</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>NULL</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td>22</td>
+					<td>NULL</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_seven_not_found_bef</td>
+				</tr>
+				<tr>
+					<td rowspan="8">7</td>
+					<td>2</td>
+					<td>NULL</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>5</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>11</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>17</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td>22</td>
+					<td>19</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td class="nome" colspan="4">test_down_seven_not_found_next</td>
+				</tr>
+				<tr>
+					<td rowspan="8">7</td>
+					<td>2</td>
+					<td>3</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>{3, 1, 0}</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>11</td>
+					<td>{3, 1, 2}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>13</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>17</td>
+					<td>{3, 5, 4}</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>19</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+				<tr>
+					<td>22</td>
+					<td>NULL</td>
+					<td>{3, 5, 6}</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</body>
+</html>

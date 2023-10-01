@@ -91,7 +91,7 @@ void test_one() {
 	basics b = set_basics(0);
 	lli *ret;
 	int qtd = 1;
-	int path_expected[1] = {3};
+	int path_expected[1] = {0};
 
 	ret = binary_search(&b.keys[0], b.vector, qtd, sizeof(lli), cmp, b.path_retorned, 0);
 
@@ -119,8 +119,8 @@ void test_one_not_found() {
 	int qtd = 1;
 	int len_path[] = {1, 1};
 	int path_expected[2][4] = {
-		{3},
-		{3} };
+		{0},
+		{0} };
 
 	test_compare_not_found(qtd, b, len_path, path_expected, 0);
 
@@ -132,8 +132,8 @@ void test_one_not_found_bef() {
 	int qtd = 1;
 	int len_path[] = {1, 1};
 	int path_expected[2][4] = {
-		{3},
-		{3} };
+		{0},
+		{0} };
 
 	test_compare_not_found(qtd, b, len_path, path_expected, -1);
 
@@ -145,8 +145,8 @@ void test_one_not_found_next() {
 	int qtd = 1;
 	int len_path[] = {1, 1};
 	int path_expected[2][4] = {
-		{3},
-		{3} };
+		{0},
+		{0} };
 
 	test_compare_not_found(qtd, b, len_path, path_expected, 1);
 

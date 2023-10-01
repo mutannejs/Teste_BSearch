@@ -22,6 +22,11 @@ Os testes criados tentam englobar as diferentes possibilidades de
 :bangbang: _**Obs:**_ os testes criados consideram que o vetor
  processado é ordenado e não possui elementos repetidos.
 
+:bangbang: Embora neste arquivo haja uma descrição de como funciona a
+ busca binária, essa descrição é superficial e não faz menção a trechos
+ de código na sua implementação, apenas o básico para compreender como
+ utilizar este programa.
+
 ## Preparando o código
 
 Primeiramente faça um clone desse repositório em sua máquina. Utilizando
@@ -54,11 +59,12 @@ Quando precisamos encontrar um dado específico dentro de um vetor,
  basicamente podemos realizar sua busca de duas maneiras diferentes, a
  partir de uma **busca linear** ou de uma **busca binária**.
 
-Na busca linear, analisamos elemento por elemento, iniciando pelo
- primeiro índice do vetor, até encontrar o dado buscado, ou percorrer
- toda a estrutura. Essa abordagem pode não ser muito eficiente quando o
- vetor possui muitos elementos e aquele que está sendo buscado se
- encontra próximo ao último índice (ou está nesta posição).
+Na busca linear, analisamos elemento por elemento iniciando pelo
+ primeiro índice do vetor até encontrar o dado buscado, ou percorrer
+ toda a estrutura e chegar a conclusão que ele não se encontra no vetor.
+ Essa abordagem pode não ser muito eficiente quando o vetor possui
+ muitos elementos e aquele que está sendo buscado se encontra próximo ao
+ último índice.
 
 Quando estamos trabalhando com um vetor ordenado, ao analisar um
  elemento qualquer sabemos de duas coisas: todos elementos em posições
@@ -71,9 +77,9 @@ Quando estamos trabalhando com um vetor ordenado, ao analisar um
  posição analisada), para então continuar sua busca a partir dele. O
  algoritmo só para ao encontrar o dado buscado, ou quando não é
  possível dividir o subvetor em uma parte menor (o subconjunto é formado
- por apenas um elemento), ou seja, o dado não está no vetor.
+ por apenas um elemento).
 
-Usando como exemplo um vetor de inteiro com 15 elementos, sendo o
+Usando como exemplo um vetor de inteiros com 15 elementos, sendo o
  primeiro elemento igual a `0`, e os próximos elementos igual ao valor
  do elemento anterior incrementado em 1, se usássemos a busca binária
  para encontrar o elemento `13`, teríamos a seguinte execução:
@@ -133,7 +139,7 @@ Referente aos argumentos, comparando com a função **bsearch()**
  dois argumentos a mais, **\*path** e **\*ifnotfound**, os quais
  permitem visualizar o caminho percorrido e retornar elementos
  alternativos caso o procurado não tenha sido encontrado, ambas
- características que não estão presentes na bsearch().
+ características não estão presentes na bsearch().
 
 Os argumentos da binary_search():
 
@@ -164,8 +170,8 @@ Os argumentos da binary_search():
  que o caminho para chegar à solução não é necessário (neste caso,
  `path` não deve ser manipulado), ou ser o endereço de um vetor de
  inteiros pré alocado, onde durante a busca, na primeira posição do
- vetor deve ser armazenado o valor do primeiro elemento processado na
- busca, na segunda posição do vetor armazenado o valor do segundo
+ vetor deve ser armazenado o índice do primeiro elemento processado na
+ busca, na segunda posição do vetor armazenado o índice do segundo
  elemento processado na busca, e assim por diante.
 
 - **ifnotfound** : esse inteiro informa qual deve ser o retorno da
@@ -225,15 +231,13 @@ Na saída do comando podemos ter acesso aos erros encontrados durante a
  básicos.
 
 Por padrão, a maioria dos testes executados consideram que o algoritmo
- da busca utiliza **arredondamento para cima** (mais a frente há uma
- explicação sobre os dois tipos de [arredondamentos](#arredondamentos)
- possíveis), por tanto, se seu código foi implementado utilizando
- arredondamento para baixo, não precisa se preocupar caso os testes
- retornem falha (mais a frente também há uma explicação de como
- [interpretar](#interpretando-as-saídas-dos-testes) o resultado dos
- testes). Além de considerar que foi utilizado arredondamento para cima,
- são executados apenas testes que encontram o elemento buscado, ou que
- retornam `NULL` por não encontrá-lo.
+ da busca utiliza **arredondamento para cima**, por tanto, se seu código
+ foi implementado utilizando arredondamento para baixo, não precisa se
+ preocupar caso os testes retornem falha (mais a frente também há uma
+ explicação de como [interpretar](#interpretando-as-saídas-dos-testes) o
+ resultado dos testes). Além de considerar que foi utilizado
+ arredondamento para cima, são executados apenas testes que encontram o
+ elemento buscado, ou que retornam `NULL` ao não encontrá-lo.
 
 Após cada alteração no código é necessário utilizar o comando `make`
  novamente. Porém, se o teste que você deseja realizar não faz parte
@@ -260,7 +264,7 @@ Após cada alteração no código é necessário utilizar o comando `make`
 **Por exemplo:** caso você tenha implementado sua busca binária com
  arredondamento para baixo, e pretenda utilizá-la em duas situações
  diferentes, uma onde caso não encontrado o elemento buscado seja
- necessário retornar o maior elemento detre os menores que ele, e na
+ necessário retornar o maior elemento dentre os menores que ele, e na
  outra onde caso o elemento buscado não seja encontrado não deva-se
  retornar nenhum outro em seu lugar, uma possível execução do programa
  para esse exemplo seria:
@@ -276,7 +280,7 @@ Se durante o desenvolvimento da busca binária, os testes que você queira
  que sejam realizados sejam sempre os mesmos, você pode alterar a
  segunda linha do arquivo `Makefile`, acrescentando a passagem de
  argumentos na execução do programa, assim, todos os testes (além da
- compilação do código há cada mudança nele) já serão executados ao
+ compilação do código a cada mudança nele) já serão executados ao
  utilizar o comando `make`.
 
 Fazendo essa alteração a partir do editor de textos nano:
@@ -334,12 +338,9 @@ Nessa saída não é possível ver os erros ou avisos de compilação, que
  para ser ignorado, independentemente dos argumentos passados na
  execução do `binary_search`).
 
-- Por fim, tanto na imagem a cima, quanto na imagem a baixo temos linhas
- demarcadas em verde, esses são testes que falharam. Por tanto, no lugar
- de `PASS`, como na linha demarcada em azul, há a palavra `FAIL`, e após
- ela temos a descrição da falha.
-
-![interpretando a saída](images/interpretando_02.jpg)
+- Por fim, na linha demarcada em verde está um exemplo de teste que
+ falhou. Por tanto, no lugar de `PASS`, como na linha demarcada em azul,
+ há a palavra `FAIL`, e após ela temos a descrição da falha.
 
 Ao combinar o **nome do teste** com a **descrição da falha**, obtemos a
  melhor indicação do motivo de seu ocorrimento. Mas antes, é necessário
@@ -371,7 +372,8 @@ Em geral, o **ambiente do teste** é composto por um vetor com _n_
  referente ao último elemento.
 
 **Por exemplo**, se _n_ for igual a 5, o vetor de primos será _{3, 5, 7,
- 11, 13}_, e o vetor de chaves será _{2, 4, 6, 10, 12, 16}_. 
+ 11, 13}_, e o vetor de chaves para o caso onde não é esperado que o
+ dado pesquisado seja encontrado será _{2, 4, 6, 10, 12, 16}_. 
 
 Na execução do teste, a busca binária será executada para cada uma das
  chaves utilizando o mesmo vetor de primos, assim, o teste só resultará
@@ -385,8 +387,8 @@ Por tanto, o teste seguirá os passos:
 
 - configurar o ambiente de teste;
 - executar a busca das _n_ (ou _n+1_ caso seja testado o retorno quando
- o elemento buscado não está no vetor) chaves dentro do vetor de primos;
-- comparar o retorno da função com o valor já esperado;
+ o elemento buscado não está no vetor) chaves dentro do vetor de primos
+ e comparar o retorno da função com o valor já esperado;
 - comparar o caminho percorrido pela função com o caminho já esperado.
 
 ### Decrição da falha
@@ -394,8 +396,11 @@ Por tanto, o teste seguirá os passos:
 A sua descrição será referente ao primeiro comportamento inesperado.
  Caso a primeira comparação do teste não esteja de acordo, a descrição
  da falha será semelhante à descrição da linha demarcada em verde na
- segunda imagem a cima. Essas saídas possuem o formato `Expected x Was
- y. Searching z`, onde:
+ imagem a baixo.
+
+![interpretando a saída](images/interpretando_02.jpg)
+
+Essas saídas possuem o formato `Expected x Was y. Searching z`, onde:
 
 - **x** : representa o retorno esperado que a função `binary_search()`
  devolvesse;
@@ -408,13 +413,14 @@ Se o retorno da função estiver de acordo, mas o caminho percorrido não
  primeira posição de **path** que não está de acordo com o esperado.
 
 
-**Por exemplo**: a falha `Element 0 Expect 5 Was 7. Searching 3.`
+**Por exemplo**: a falha `Element 0 Expect 1 Was 2. Searching 3.`
  informa que ao passar a chave _3_ para a busca binária, embora o
  retorno da função tenha sido correto (essa informção é implicita, pois
  se não fosse verdade, a descrição da falha seria referente à essa
  informação, e não ao caminho percorrido), o primeiro elemento
- processado no caminho percorrido pela função possui valor _7_, porém
- era esperado que esse valor fosse _5_.
+ processado no caminho percorrido pela função está na terceira posição
+ do vetor (lembrando que o primeiro elemento está no indíce 0), porém,
+ era esperado que o segundo elemento fosse processado.
 
 Já a falha `Expected 19 Was 2. Searching 20` informa que ao passar a
  chave _20_, o retorno da busca foi o valor _2_, quando na verdade
@@ -427,7 +433,7 @@ Já a falha `Expected 19 Was 2. Searching 20` informa que ao passar a
  sendo necessário identificá-lo com base nos argumentos passados na
  execução do programa e no último teste executado até o fim (o último
  presente na saída). Para saber a sequência em que os testes são feitos
- acesse [doc/sequence.txt](doc/sequence.txt).
+ acesse [doc/sequence.txt](doc/sequence.html).
 
 ### Nome do teste
 
@@ -443,7 +449,7 @@ Todos os testes possuem a descrição do que fazem em seu nome. Em geral,
 
 Os testes que possuem mais informação, ou seja, os testes onde o
  elemento procurado não está no vetor, possuem após a informação da
- quantidade de elementos, as palavras `not_found`, e após elas, podem ou
+ quantidade de elementos as palavras `not_found` e após elas, podem ou
  não ter a palavra `bef` (de before) ou a palavra `next`.
 
 - Caso o nome do teste termine em `not_found`, significa que na execução
@@ -523,7 +529,7 @@ Embora os testes mencionados realizem apenas arredondamento para cima,
 
 Para saber como um teste específico funciona, qual seu ambiente e outras
  informações mais detalhadas sobre ele, acesse
- [doc/tests.txt](doc/tests.txt).
+ [doc/tests.txt](doc/tests.html).
 
 ## A fazer
 

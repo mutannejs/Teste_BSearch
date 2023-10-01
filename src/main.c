@@ -2,9 +2,10 @@
 
 int main(int argc, char *argv[]) {
 
-	int istop = 1;
-	int notfound[] = {0, 0, 0};
+	int istop = 1; // arredondamento para cima?
+	int notfound[] = {0, 0, 0}; // quais argumentos passar em notfound
 
+	// trata os argumentos, para decidir quais testes realizar
 	for (int i = 1; i < argc; i++) {
 		int op = atoi(argv[i]);
 		if (!strcmp(argv[i], "d")) {
