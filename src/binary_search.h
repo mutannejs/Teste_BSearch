@@ -68,79 +68,79 @@ void test_one_not_found_next();
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
 
-void test_top_four();
+void test_ceil_four();
 
-void test_top_five();
+void test_ceil_five();
 
-void test_top_six();
+void test_ceil_six();
 
-void test_top_seven();
+void test_ceil_seven();
 
-void top_four_not_found(int ifnotfound);
+void ceil_four_not_found(int ifnotfound);
 
-void top_five_not_found(int ifnotfound);
+void ceil_five_not_found(int ifnotfound);
 
-void top_six_not_found(int ifnotfound);
+void ceil_six_not_found(int ifnotfound);
 
-void top_seven_not_found(int ifnotfound);
+void ceil_seven_not_found(int ifnotfound);
 
-void test_top_four_not_found();
+void test_ceil_four_not_found();
 
-void test_top_five_not_found();
+void test_ceil_five_not_found();
 
-void test_top_six_not_found();
+void test_ceil_six_not_found();
 
-void test_top_seven_not_found();
+void test_ceil_seven_not_found();
 
-void test_top_four_not_found_bef();
+void test_ceil_four_not_found_bef();
 
-void test_top_five_not_found_bef();
+void test_ceil_five_not_found_bef();
 
-void test_top_six_not_found_bef();
+void test_ceil_six_not_found_bef();
 
-void test_top_seven_not_found_bef();
+void test_ceil_seven_not_found_bef();
 
-void test_top_four_not_found_next();
+void test_ceil_four_not_found_next();
 
-void test_top_five_not_found_next();
+void test_ceil_five_not_found_next();
 
-void test_top_six_not_found_next();
+void test_ceil_six_not_found_next();
 
-void test_top_seven_not_found_next();
+void test_ceil_seven_not_found_next();
 
 
-/* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA ### */
+/* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA BAIXO ### */
 
-void test_down_four();
+void test_floor_four();
 
-void test_down_five();
+void test_floor_five();
 
-void test_down_six();
+void test_floor_six();
 
-void test_down_seven();
+void test_floor_seven();
 
-void test_down_four_not_found();
+void test_floor_four_not_found();
 
-void test_down_five_not_found();
+void test_floor_five_not_found();
 
-void test_down_six_not_found();
+void test_floor_six_not_found();
 
-void test_down_seven_not_found();
+void test_floor_seven_not_found();
 
-void test_down_four_not_found_bef();
+void test_floor_four_not_found_bef();
 
-void test_down_five_not_found_bef();
+void test_floor_five_not_found_bef();
 
-void test_down_six_not_found_bef();
+void test_floor_six_not_found_bef();
 
-void test_down_seven_not_found_bef();
+void test_floor_seven_not_found_bef();
 
-void test_down_four_not_found_next();
+void test_floor_four_not_found_next();
 
-void test_down_five_not_found_next();
+void test_floor_five_not_found_next();
 
-void test_down_six_not_found_next();
+void test_floor_six_not_found_next();
 
-void test_down_seven_not_found_next();
+void test_floor_seven_not_found_next();
 
 #endif

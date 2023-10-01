@@ -3,7 +3,7 @@
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA
  * QUE RETORNA ELEMENTO ENCONTRADO ### */
 
-void test_down_four() {
+void test_floor_four() {
 
 	basics b = set_basics(0);
 	int qtd = 4;
@@ -18,7 +18,7 @@ void test_down_four() {
 
 }
 
-void test_down_five() {
+void test_floor_five() {
 
 	basics b = set_basics(0);
 	int qtd = 5;
@@ -34,7 +34,7 @@ void test_down_five() {
 
 }
 
-void test_down_six() {
+void test_floor_six() {
 
 	basics b = set_basics(0);
 	int qtd = 6;
@@ -51,7 +51,7 @@ void test_down_six() {
 
 }
 
-void test_down_seven() {
+void test_floor_seven() {
 
 	basics b = set_basics(0);
 	int qtd = 7;
@@ -73,7 +73,7 @@ void test_down_seven() {
 /* ### FUNÇÕES GENÉRICAS PARA REALIZAÇÃO DOS TESTES USANDO BUSCA BINÁRIA
  * COM ARREDONDAMENTO PARA CIMA ### */
 
-void down_four_not_found(int ifnotfound) {
+void floor_four_not_found(int ifnotfound) {
 
 	basics b = set_basics(1);
 	int qtd = 4;
@@ -89,7 +89,7 @@ void down_four_not_found(int ifnotfound) {
 
 }
 
-void down_five_not_found(int ifnotfound) {
+void floor_five_not_found(int ifnotfound) {
 
 	basics b = set_basics(1);
 	int qtd = 5;
@@ -106,7 +106,7 @@ void down_five_not_found(int ifnotfound) {
 
 }
 
-void down_six_not_found(int ifnotfound) {
+void floor_six_not_found(int ifnotfound) {
 
 	basics b = set_basics(1);
 	int qtd = 6;
@@ -124,7 +124,7 @@ void down_six_not_found(int ifnotfound) {
 
 }
 
-void down_seven_not_found(int ifnotfound) {
+void floor_seven_not_found(int ifnotfound) {
 
 	basics b = set_basics(1);
 	int qtd = 7;
@@ -147,58 +147,58 @@ void down_seven_not_found(int ifnotfound) {
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA
  * QUE RETORNA ELEMENTO NÃO ENCONTRADO ### */
 
-void test_down_four_not_found() {
-	down_four_not_found(0);
+void test_floor_four_not_found() {
+	floor_four_not_found(0);
 }
 
-void test_down_five_not_found() {
-	down_five_not_found(0);
+void test_floor_five_not_found() {
+	floor_five_not_found(0);
 }
 
-void test_down_six_not_found() {
-	down_six_not_found(0);
+void test_floor_six_not_found() {
+	floor_six_not_found(0);
 }
 
-void test_down_seven_not_found() {
-	down_seven_not_found(0);
+void test_floor_seven_not_found() {
+	floor_seven_not_found(0);
 }
 
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA
  * QUE RETORNA ELEMENTO PREDECESSOR ### */
 
-void test_down_four_not_found_bef() {	
-	down_four_not_found(-1);
+void test_floor_four_not_found_bef() {	
+	floor_four_not_found(-1);
 }
 
-void test_down_five_not_found_bef() {
-	down_five_not_found(-1);
+void test_floor_five_not_found_bef() {
+	floor_five_not_found(-1);
 }
 
-void test_down_six_not_found_bef() {	
-	down_six_not_found(-1);
+void test_floor_six_not_found_bef() {	
+	floor_six_not_found(-1);
 }
 
-void test_down_seven_not_found_bef() {	
-	down_seven_not_found(-1);
+void test_floor_seven_not_found_bef() {	
+	floor_seven_not_found(-1);
 }
 
 
 /* ### TESTES USANDO BUSCA BINÁRIA COM ARREDONDAMENTO PARA CIMA
  * QUE RETORNA ELEMENTO SUCESSOR ### */
 
-void test_down_four_not_found_next() {
-	down_four_not_found(1);
+void test_floor_four_not_found_next() {
+	floor_four_not_found(1);
 }
 
-void test_down_five_not_found_next() {
-	down_five_not_found(1);
+void test_floor_five_not_found_next() {
+	floor_five_not_found(1);
 }
 
-void test_down_six_not_found_next() {
-	down_six_not_found(1);
+void test_floor_six_not_found_next() {
+	floor_six_not_found(1);
 }
 
-void test_down_seven_not_found_next() {
-	down_seven_not_found(1);
+void test_floor_seven_not_found_next() {
+	floor_seven_not_found(1);
 }

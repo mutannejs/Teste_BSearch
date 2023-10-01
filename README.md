@@ -249,8 +249,8 @@ Após cada alteração no código é necessário utilizar o comando `make`
 
 - Referentes ao tipo de arredondamento utilizado (caso ambos valores
  sejam passados, o último será o considerado)
-	- **t** : executa os testes com arredondamento para cima;
-	- **d** : executa os testes com arredondamento para baixo.
+	- **c** : executa os testes com arredondamento para cima;
+	- **f** : executa os testes com arredondamento para baixo.
 
 - Referentes ao retorno da função caso o elemento buscado não seja
  encontrado (pode-se usar mais que um)
@@ -269,7 +269,7 @@ Após cada alteração no código é necessário utilizar o comando `make`
  retornar nenhum outro em seu lugar, uma possível execução do programa
  para esse exemplo seria:
 
-	./binary_search d -1 0
+	./binary_search f -1 0
 
 Assim, os testes para as situações consideradas, e apenas eles, seriam
  realizados.
@@ -304,7 +304,7 @@ Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
  partir da execução do comando `make` com o arquivo `Makefile` alterado
  para realizar testes com arredondamento para baixo:
 
-![teste com arredondamento para baixo](images/test_down.jpg)
+![teste com arredondamento para baixo](images/test_floor.jpg)
 
 Nessa saída não é possível ver os erros ou avisos de compilação, que
  são mostrados antes da primeira linha da imagem mostrada. Do que está
@@ -439,9 +439,9 @@ Já a falha `Expected 19 Was 2. Searching 20` informa que ao passar a
 
 Todos os testes possuem a descrição do que fazem em seu nome. Em geral,
  todos os testes tem seu nome iniciado com a palavra `test` seguido da
- palavra `top` ou `down`, inidicando qual tipo de arredondamento será
- considerado, arredondamento para baixo (down) ou arredondamento para
- cima (top). Depois, temos no nome algum número em formato texto (one,
+ palavra `ceil` ou `floor`, inidicando qual tipo de arredondamento será
+ considerado, arredondamento para baixo (floor) ou arredondamento para
+ cima (ceil). Depois, temos no nome algum número em formato texto (one,
  four, five, six ou seven), indicando quantos elementos o vetor onde é
  feito a busca possui. Alguns testes tem seu nome terminado por esse
  número, sendo estes, testes onde o elemento procurado está presente no
@@ -470,13 +470,13 @@ Por fim, temos três testes que não seguem esse padrão, e que são
  `binary_search()` passa o valor `NULL` para o argumento `*path`,
  indicando que não deve-se retornar o caminho percorrido.
 
-**Por exemplo**, o teste `test_top_five_not_found_bef` testa a busca
+**Por exemplo**, o teste `test_ceil_five_not_found_bef` testa a busca
  binária implementada com arredondamento para cima utilizando um vetor
  de cinco elementos, onde o elemento procurado não está presente, sendo
  esperado que ao não encontrá-lo seja retornado o maior elemento detre
  aqueles com o atributo chave menores que o valor de `key`.
 
-O teste `test_down_seven_not_found_next` por sua vez, testa a busca
+O teste `test_floor_seven_not_found_next` por sua vez, testa a busca
  binária implementada com arredondamento para baixo ultilizando um vetor
  de sete elementos, onde o elemento procurado não está presente, sendo
  esperado que ao não encontrá-lo seja retornado o menor elemento detre
