@@ -224,7 +224,7 @@ Após escrever o código da busca binária, para compilar o programa e
 
 	make
 
-![make sem parâmetros](images/make_01.jpg)
+![make sem parâmetros](images/make_01.png)
 
 Na saída do comando podemos ter acesso aos erros encontrados durante a
  compilação, e logo em seguida o resultado da execução dos testes
@@ -285,11 +285,11 @@ Se durante o desenvolvimento da busca binária, os testes que você queira
 
 Fazendo essa alteração a partir do editor de textos nano:
 
-![alterando o arquivo Makefile](images/make_alterado.jpg)
+![alterando o arquivo Makefile](images/make_alterado.png)
 
 Executando novamente o comando `make`:
 
-![executando o Makefile alterado](images/make_02.jpg)
+![executando o Makefile alterado](images/make_02.png)
 
 Na saída podemos ver que vários erros foram encontrados durante os
  testes, porém, isso já era esperado, pois o algoritmo que estava sendo
@@ -304,13 +304,13 @@ Primeiramente vamos utilizar como exemplo a saída a baixo, gerada a
  partir da execução do comando `make` com o arquivo `Makefile` alterado
  para realizar testes com arredondamento para baixo:
 
-![teste com arredondamento para baixo](images/test_floor.jpg)
+![teste com arredondamento para baixo](images/interpretando_01.png)
 
 Nessa saída não é possível ver os erros ou avisos de compilação, que
  são mostrados antes da primeira linha da imagem mostrada. Do que está
  presente na imagem, devemos dar atenção às seguintes informações:
 
-![interpretando a saída](images/interpretando_01.jpg)
+![interpretando a saída](images/interpretando_marcacoes.png)
 
 - Demarcado em amarelo, temos o comando usado para executar o
  `binary_search`, o mesmo comando presente na segunda linha do
@@ -398,7 +398,7 @@ A sua descrição será referente ao primeiro comportamento inesperado.
  da falha será semelhante à descrição da linha demarcada em verde na
  imagem a baixo.
 
-![interpretando a saída](images/interpretando_02.jpg)
+![interpretando a saída](images/interpretando_02.png)
 
 Essas saídas possuem o formato `Expected x Was y. Searching z`, onde:
 
@@ -433,7 +433,7 @@ Já a falha `Expected 19 Was 2. Searching 20` informa que ao passar a
  sendo necessário identificá-lo com base nos argumentos passados na
  execução do programa e no último teste executado até o fim (o último
  presente na saída). Para saber a sequência em que os testes são feitos
- acesse [doc/sequence.txt](doc/sequence.html).
+ acesse [doc/sequence.html](doc/sequence.html).
 
 ### Nome do teste
 
@@ -529,7 +529,7 @@ Embora os testes mencionados realizem apenas arredondamento para cima,
 
 Para saber como um teste específico funciona, qual seu ambiente e outras
  informações mais detalhadas sobre ele, acesse
- [doc/tests.txt](doc/tests.html).
+ [doc/tests.html](doc/tests.html).
 
 ## A fazer
 
@@ -554,6 +554,7 @@ Para saber como um teste específico funciona, qual seu ambiente e outras
 	- [X] descrever como analisar os erros encontrados
 	- [X] descrever o motivo de cada teste
 - [X] corrigir erros no README
-- [X] escrever arquivo tests.txt
-- [X] escrever arquivo sequence.txt
-- [ ] melhorar o README
+- [X] escrever arquivo tests.html
+- [X] escrever arquivo sequence.html
+- [ ] possibilitar não verificação do retorno da busca
+

@@ -11,12 +11,14 @@ int main(int argc, char *argv[]) {
 		if (!strcmp(argv[i], "f")) {
 			isceil = 0;
 		}
-		else if (op == 2) {
-			for (int j = 0; j < 3; j++)
-				notfound[j] = 1;
-		}
-		else if (op > -2 && op < 2){
-			notfound[op+1] = 1;
+		else if (strcmp(argv[i], "c")) {
+			if (op == 2) {
+				for (int j = 0; j < 3; j++)
+					notfound[j] = 1;
+			}
+			else if (op > -2 && op < 2){
+				notfound[op+1] = 1;
+			}
 		}
 	}
 	if (!notfound[0] && !notfound[1] && !notfound[2])

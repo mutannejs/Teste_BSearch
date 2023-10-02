@@ -1,5 +1,5 @@
 all: binary_search
-	./binary_search
+	./binary_search f
 
 binary_search: main.o binary_search.o compare.o unity.o tests_floor.o tests_ceil.o tests.o
 	@ gcc -o binary_search binary_search.o main.o compare.o tests_floor.o tests_ceil.o tests.o unity.o -std=c99 -Wall -Wextra -Wno-unused-result -Wpedantic -O0
